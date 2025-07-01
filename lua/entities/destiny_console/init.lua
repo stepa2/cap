@@ -288,7 +288,7 @@ function ENT:Use(ply, ...)
 
 			local number, KinoEnt = StarGate.FindKino(ply);
 			local kino = KinoEnt[button - 12];
-			if IsValid(kino) then UpdateRenderTarget(kino) end
+			if IsValid(kino) then StarGate.UpdateRenderTarget(kino) end
 
 			self.WireDisplay = 3;
 			self.Entity:SetNetworkedInt("Wire",self.WireDisplay);

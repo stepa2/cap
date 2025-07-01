@@ -191,7 +191,7 @@ function ENT:OnRemove()
 		end
 		self:UnControl(self.Controler)
 	end
-	UpdateRenderTarget(NULL)
+	StarGate.UpdateRenderTarget(NULL)
 	timer.Remove("MALPWire_"..self:EntIndex())
 	timer.Remove("MALP_DMG"..self:EntIndex())
 end
@@ -264,7 +264,7 @@ function ENT:Think()
 							end
 							self.pgate.DisAutoClose = true;
 							self.SignalLost = false;
-							UpdateRenderTarget(self.RTCamera);
+							StarGate.UpdateRenderTarget(self.RTCamera);
 						end
 					end
 				else
@@ -273,7 +273,7 @@ function ENT:Think()
 					else
 						self.SignalLost = false;
 					end
-					UpdateRenderTarget(NULL);
+					StarGate.UpdateRenderTarget(NULL);
 				end
 			end
 		else
@@ -282,7 +282,7 @@ function ENT:Think()
 			else
 				self.SignalLost = false;
 			end
-			UpdateRenderTarget(self.RTCamera);
+			StarGate.UpdateRenderTarget(self.RTCamera);
 		end
 	end
 	/*
@@ -293,12 +293,12 @@ function ENT:Think()
 				self.pgate.EventHorizon.AutoClose=false
 				if(IsValid(self.pgate.EventHorizon.Target) and self.pgate.EventHorizon.Target==self.gate.EventHorizon) then --Only if the player is near the gate that is active with the malps gate
 					self.SignalLost=false
-					UpdateRenderTarget(self.RTCamera)
+					StarGate.UpdateRenderTarget(self.RTCamera)
 				end
 			end
 		else
 			self.SignalLost=true
-			UpdateRenderTarget(NULL)
+			StarGate.UpdateRenderTarget(NULL)
 		end
 	end
 	*/
@@ -499,7 +499,7 @@ function ENT:SpawnRTCam(ent,p)
 		e:SetAngles(self:GetAngles())
 		e:SetRenderMode(RENDERMODE_TRANSALPHA)
 		e:SetColor(Color(255,255,255,0))
-		UpdateRenderTarget(e)
+		StarGate.UpdateRenderTarget(e)
 		self.RTCamera=e
 		if CPPI and IsValid(p) and e.CPPISetOwner then e:CPPISetOwner(p) end
 	end
@@ -544,7 +544,7 @@ function ENT:Destroy()
 	util.Effect("Explosion",effectdata,true,true);
 	constraint.RemoveAll(self)
 	self.SignalLost = true
-	UpdateRenderTarget(NULL);
+	StarGate.UpdateRenderTarget(NULL);
 	self.Destroyed = true
 	if self.Sounds.LoopSound then
 		self.Sounds.LoopSound:Stop();

@@ -32,25 +32,7 @@ if (CLIENT) then
 end
 
 if (SERVER) then
-	function UpdateRenderTarget( Ent )
-	    if ( !Ent || !Ent:IsValid() ) then return end
 
-	    if ( !RenderTargetCamera || !RenderTargetCamera:IsValid() ) then
-
-	        RenderTargetCamera = ents.Create( "point_camera" )
-	        RenderTargetCamera:SetKeyValue( "GlobalOverride", 1 )
-	        RenderTargetCamera:Spawn()
-	        RenderTargetCamera:Activate()
-	        RenderTargetCamera:Fire( "SetOn", "", 0.0 )
-
-	    end
-	    Pos = Ent:LocalToWorld( Vector( 12,0,0) )
-	    RenderTargetCamera:SetPos(Pos)
-	    RenderTargetCamera:SetAngles(Ent:GetAngles())
-	    RenderTargetCamera:SetParent(Ent)
-
-	    RenderTargetCameraProp = Ent
-	end
 
 	-- workaround for fix gmsave
 	local gmsave_ShouldSaveEntity  = gmsave.ShouldSaveEntity

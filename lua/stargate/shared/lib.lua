@@ -78,3 +78,24 @@ function StarGate.CFG:Get(node,key,default)
 	end
 	return default;
 end
+
+if SERVER then
+	local RenderTargetCamera
+
+	function StarGate.UpdateRenderTarget( Ent )
+	    if not IsValid(ent) then return end
+
+	    if not IsValid(RenderTargetCamera) then
+	        RenderTargetCamera = ents.Create( "point_camera" )
+	        RenderTargetCamera:SetKeyValue( "GlobalOverride", 1 )
+	        RenderTargetCamera:Spawn()
+	        RenderTargetCamera:Activate()
+	    end
+
+	    local pos = Ent:LocalToWorld( Vector( 12,0,0) )
+	    RenderTargetCamera:SetPos(pos)
+	    RenderTargetCamera:SetAngles(Ent:GetAngles())
+	    RenderTargetCamera:SetParent(Ent)
+	    RenderTargetCamera:Fire( "SetOn", "", 0.0 )
+	end
+end
