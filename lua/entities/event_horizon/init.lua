@@ -37,7 +37,6 @@ local BUFFER = {InBuffer = {}};
 ENT.IgnoreTouch = true; -- This tells the physical objects like drones or staff not to collide with the eventhorizon (= no explode on them)
 ENT.CDSIgnore = true; -- Fixes Combat Damage System destroying this entity
 ENT.DrawEnterEffectTime = 0;
-ENT.CAP_NotSave = true;
 ENT.DoNotDuplicate = true 
 
 ENT.DefModel = "models/zup/stargate/stargate_horizon.mdl"

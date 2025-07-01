@@ -24,8 +24,6 @@ if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("entw
 
 AddCSLuaFile();
 
-ENT.CAP_NotSave = true;
-
 local Planets = {}
 
 for _, logicEnt in pairs(ents.FindByClass("logic_case")) do

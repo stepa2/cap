@@ -7,7 +7,6 @@ if SERVER then
 if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("base")) then return end
 AddCSLuaFile()
 
-ENT.CAP_NotSave = true
 ENT.DoNotDuplicate = true 
 
 function ENT:Initialize()

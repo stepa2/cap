@@ -17,7 +17,6 @@ if SERVER then
 if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("base")) then return end
 AddCSLuaFile();
 
-ENT.CAP_NotSave = true;
 ENT.NotTeleportable = true;
 ENT.NoDissolve = true;
 ENT.CDSIgnore = true; -- CDS Immunity

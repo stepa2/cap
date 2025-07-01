@@ -24,8 +24,7 @@ ENT.Author = "Zup"
 ENT.Spawnable = false
 ENT.AdminSpawnable = false
 
-ENT.CAP_NotSave = true
-ENT.DoNotDuplicate = true 
+ENT.DoNotDuplicate = true
 
 if SERVER then
 

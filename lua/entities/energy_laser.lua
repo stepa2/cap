@@ -14,8 +14,6 @@ if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("entw
 
 AddCSLuaFile()
 
-ENT.CAP_NotSave = true;
-
 ENT.Sounds={
 	Loop = Sound("weapons/asuran_beam.wav"),
 }

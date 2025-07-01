@@ -33,14 +33,6 @@ end
 
 if (SERVER) then
 
-
-	-- workaround for fix gmsave
-	local gmsave_ShouldSaveEntity  = gmsave.ShouldSaveEntity
-	function gmsave.ShouldSaveEntity(ent,t)
-		if (ent.CAP_NotSave) then return false end
-		return gmsave_ShouldSaveEntity(ent,t);
-	end
-
 	local gmsave_LoadMap = gmsave.LoadMap
 	function gmsave.LoadMap(strMapContents, ply)
 		-- fix for gatespawner

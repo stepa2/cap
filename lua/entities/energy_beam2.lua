@@ -14,8 +14,6 @@ if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("entw
 
 AddCSLuaFile()
 
-ENT.CAP_NotSave = true;
-
 function ENT:Initialize()
 	self:SetCollisionGroup(COLLISION_GROUP_PROJECTILE);
 	self:DrawShadow(false);

@@ -22,10 +22,9 @@ if SERVER then
 if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("ship")) then return end
 AddCSLuaFile();
 ENT.IgnoreTouch = true;
-ENT.CAP_NotSave = true;
+ENT.DoNotDuplicate = true;
 ENT.NoAutoClose = true; -- Will not cause an autoclose event on the stargates!
 ENT.CDSIgnore = true; -- CDS Immunity
-ENT.DoNotDuplicate = true 
 function ENT:gcbt_breakactions() end; ENT.hasdamagecase = true; -- GCombat invulnarability!
 
 end

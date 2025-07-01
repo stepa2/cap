@@ -32,7 +32,7 @@ if SERVER then
 if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("ship")) then return end
 AddCSLuaFile();
 
-ENT.CAP_NotSave = true;
+ENT.DoNotDuplicate = true;
 
 ENT.Sounds={
 	Engage=Sound("shields/shield_engage.mp3"),

@@ -85,7 +85,6 @@ function ENT:Initialize()
 		if (i!=0) then
 			block:SetColor(ent.Segments[1]:GetColor())
 		end
-		--block.CAP_NotSave = true;
 
 		local ed = EffectData()
 			ed:SetEntity(block)
@@ -101,7 +100,6 @@ function ENT:Initialize()
 		effblock:Spawn();
 		effblock:Activate();
 		effblock:SetParent(ent);
-		--effblock.CAP_NotSave = true;
 
 		table.insert(self.EffectSegments, effblock)
 		i = i + 1;

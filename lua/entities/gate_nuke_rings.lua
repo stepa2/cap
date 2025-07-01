@@ -12,8 +12,6 @@ if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("entw
 
 AddCSLuaFile()
 
-ENT.CAP_NotSave = true;
-
 function ENT:Setup(pos, ang, scale) -- THIS MUST BE CALLED BEFORE IT'S SPAWNED!
 	self.StartPos = pos
 	self.ANG = ang
