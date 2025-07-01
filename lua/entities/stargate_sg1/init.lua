@@ -750,7 +750,7 @@ function ENT:OnRemove()
 			self.Target:EmergencyShutdown(true);
 		end
 	end
-	if (self.HasRD) then StarGate.WireRD.OnRemove(self) end;
+	if CAF then StarGate.WireRD.OnRemove(self) end;
 	self:RemoveGateFromList();
 end
 

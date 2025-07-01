@@ -269,7 +269,7 @@ function ENT:ActivateStargate(inbound,fast)
 	self:CheckConnection()
 	self.NoxDialingType = false;
 	self.NoxIrisReactivated = false;
-	if (self.HasRD and not self:CheckEnergy(true) and not self.Dialling and not inbound) then
+	if (CAF and not self:CheckEnergy(true) and not self.Dialling and not inbound) then
 		self.Outbound = true;
 		local action = self.Sequence:New();
 		action = self.Sequence:DialFail(nil,true);
@@ -340,7 +340,7 @@ function ENT:NoxActivateStargate(inbound)
 	 -- prepare power calculations, and check for energy
 	self:CheckConnection();
 	self.NoxDialingType = true;
-	if (self.HasRD and not self:CheckEnergy(true) and not self.Dialling and not inbound or not IsValid(e) and not self:IsSelfDial()) then
+	if (CAF and not self:CheckEnergy(true) and not self.Dialling and not inbound or not IsValid(e) and not self:IsSelfDial()) then
 		self.Outbound = true;
 		local action = self.Sequence:New();
 		action = self.Sequence:DialFail(nil,true);
@@ -402,7 +402,7 @@ function ENT:OnButtActivateStargate(inbound)
 	 -- prepare power calculations, and check for energy
 	self:CheckConnection() -- prepare power calculations
 	self.NoxDialingType = false;
-	if (self.HasRD and not self:CheckEnergy() and not inbound or not inbound and IsValid(e) and not e.OnButtLock) then
+	if (CAF and not self:CheckEnergy() and not inbound or not inbound and IsValid(e) and not e.OnButtLock) then
 		self.Outbound = true;
 		local action = self.Sequence:New();
 		local busy = false;
@@ -526,7 +526,7 @@ function ENT:OnButtCheckStargate()
 	local e = self.Target; -- Quick reference (keeps code shorter)
 	 -- prepare power calculations, and check for energy
 	self:CheckConnection() -- prepare power calculations
-	if (self.HasRD and not self:CheckEnergy(false,true) and not self.Dialling) then
+	if (CAF and not self:CheckEnergy(false,true) and not self.Dialling) then
 		return false;
 	else
 		-- proper dialing

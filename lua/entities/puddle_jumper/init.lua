@@ -154,7 +154,7 @@ function ENT:Initialize(ply)
 		UP=0,
 	};
 
-	if(self.HasRD) then
+	if CAF then
 		if(self.CanHaveLS) then
 			self.grav_plate = 1;
 		end
@@ -241,7 +241,7 @@ function ENT:Think()   --######### Do a lot of stuff@ RononDex
 		umsg.End()
 	end
 	--####### Keep giving us air, coolant etc.
-	if(self.HasRD) then
+	if CAF then
 		if(self.CanHaveLS) then
 			self:LSSupport()
 		end
@@ -526,16 +526,9 @@ function ENT:LSSupport()
 		for _,p in pairs(player.GetAll()) do -- Find all players
 			local pos = (p:GetPos()-ent_pos):Length(); -- Where they are in relation to the jumper
 			if(pos<400 and p.suit) then -- If they're close enough
-				if(not(StarGate.RDThree())) then
-					if (p.suit.air<100) then p.suit.air = 100; end -- They get air
-					if (p.suit.energy<100) then p.suit.energy = 100; end -- and energy
-					if (p.suit.coolant<100) then p.suit.coolant = 100; end -- and coolant
-				else
-					-- We need double the amount of LS3(No idea why)
-					if (p.suit.air<200) then p.suit.air = 200; end -- They get air
-					if (p.suit.energy<200) then p.suit.energy = 200; end -- and energy
-					if (p.suit.coolant<200) then p.suit.coolant = 200; end -- and coolant
-				end
+				if (p.suit.air<200) then p.suit.air = 200; end -- They get air
+				if (p.suit.energy<200) then p.suit.energy = 200; end -- and energy
+				if (p.suit.coolant<200) then p.suit.coolant = 200; end -- and coolant
 			end
 		end
 	end

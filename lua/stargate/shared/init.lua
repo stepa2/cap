@@ -25,15 +25,6 @@ end
 
 --################# Init @aVoN
 function StarGate.Init()
-	-- Resource Distribution Installed?
-	-- fix for client/server energy will be later @ AlexALX
-	if(/*(CLIENT and file.Exists("stargate/client/energy.lua","LUA") or SERVER and*/ StarGate.CheckModule("energy") and (Environments or #file.Find("weapons/gmod_tool/environments_tool_base.lua","LUA") == 1 or Dev_Link or rd3_dev_link or #file.Find("weapons/gmod_tool/stools/dev_link.lua","LUA") == 1 or #file.Find("weapons/gmod_tool/stools/rd3_dev_link.lua","LUA") == 1)) then //Thanks to mercess2911: http://www.facepunch.com/showpost.php?p=15508150&postcount=10070
-		StarGate.HasResourceDistribution = true;
-	else
-		StarGate.HasResourceDistribution = false;
-	end
-	
-
 	if (not file.IsDir("stargate","DATA")) then
 		file.CreateDir("stargate","DATA");
 	end

@@ -153,7 +153,7 @@ function TOOL:ControlsPanel(Panel)
 	Panel:AddControl("PropSelect",{Label=SGLanguage.GetMessage("stool_model"),ConVar="stargate_iris_model",Category="",Models=self.Models});
 	Panel:CheckBox(SGLanguage.GetMessage("stool_autoweld"),"stargate_iris_autoweld");
 	--[[
-	if(StarGate.HasResourceDistribution) then
+	if CAF then
 		Panel:CheckBox(SGLanguage.GetMessage("stool_autolink"),"stargate_iris_autolink"):SetToolTip(SGLanguage.GetMessage("stool_autolink_desc"));
 	end
 	--]]

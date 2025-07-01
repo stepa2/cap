@@ -13,11 +13,7 @@ ENT.WireDebugName = "Apple Core"
 
 list.Set("CAP.Entity", ENT.PrintName, ENT);
 
-if (Environments) then
-	ENT.IsNode = false
-else
-	ENT.IsNode = true
-end
+ENT.IsNode = true
 
 if SERVER then
 AddCSLuaFile();

@@ -139,7 +139,7 @@ function ENT:Initialize()
 
 	--###### Energy Vars
 	self:AddResource("energy",1)
-	if(self.HasRD) then
+	if CAF then
 		self.ShouldConsume=true
 	else
 		self.ShouldConsume=false

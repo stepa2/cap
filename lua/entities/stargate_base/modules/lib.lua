@@ -157,7 +157,7 @@ end
 
 --################# Check connection type and prepare basic energy calculation
 function ENT:CheckConnection()
-	if (not self.HasRD) then return true end -- without RD always have energy
+	if not CAF then return true end -- without RD always have energy
 
 	local Sclass = self:GetClass();
 
@@ -183,7 +183,7 @@ end
 
 --################# Check if gate are powered somehow and if source is capable of handling gate consumption
 function ENT:HaveEnergy(check,iris,first)
-	if (not self.HasRD) then return true end -- without RD always have energy
+	if not CAF then return true end -- without RD always have energy
 	if(not util.tobool(GetConVar("stargate_energy_dial"):GetInt()))then return true end;
 	if(self.GateSpawnerSpawned and not util.tobool(GetConVar("stargate_energy_dial_spawner"):GetInt()))then return true end;
 	local energy = false;
@@ -239,7 +239,7 @@ function ENT:HaveEnergy(check,iris,first)
 end
 
 function ENT:CheckEnergy(dhd, no_consume)
-	if (not self.HasRD) then return true end -- without RD always have energy
+	if not CAF then return true end -- without RD always have energy
 	if(not util.tobool(GetConVar("stargate_energy_dial"):GetInt()))then return true end;
 	if(self.GateSpawnerSpawned and not util.tobool(GetConVar("stargate_energy_dial_spawner"):GetInt()))then return true end;
 	local energy = false;
@@ -271,7 +271,7 @@ function ENT:CheckEnergy(dhd, no_consume)
 end
 
 function ENT:CheckEnergyDHD()
-	if (not self.HasRD) then return false end
+	if not CAF then return false end
 	if(not util.tobool(GetConVar("stargate_energy_dial"):GetInt()))then return false end;
 	if(self.GateSpawnerSpawned and not util.tobool(GetConVar("stargate_energy_dial_spawner"):GetInt()))then return false end;
 	local energy = false;
@@ -295,7 +295,7 @@ function ENT:WireGetEnergy(addr,dist)
 	local distance = 100;
 	if(IsValid(target)) then distance = (self:GetPos() - target:GetPos()):Length(); elseif (dist) then distance = -1; end
 	if (dist) then return distance; end
-	if (not self.HasRD) then return -1 end -- without RD always have energy
+	if not CAF then return -1 end -- without RD always have energy
 	if(not util.tobool(GetConVar("stargate_energy_dial"):GetInt()))then return -1 end;
 	if(self.GateSpawnerSpawned and not util.tobool(GetConVar("stargate_energy_dial_spawner"):GetInt()))then return -1 end;
 	local enconsume = (self.GalaxyConsumption*isgalaxy + self.SGUConsumption*issgu + 1);

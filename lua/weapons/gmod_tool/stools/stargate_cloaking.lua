@@ -147,7 +147,7 @@ function TOOL:ControlsPanel(Panel)
 	Panel:CheckBox(SGLanguage.GetMessage("stool_stargate_cloaking_nc"),"stargate_cloaking_phase_shift"):SetToolTip(SGLanguage.GetMessage("stool_stargate_cloaking_nc_desc"));
 	Panel:CheckBox(SGLanguage.GetMessage("stool_stargate_cloaking_ca"),"stargate_cloaking_attached"):SetToolTip(SGLanguage.GetMessage("stool_stargate_cloaking_ca_desc"))
 	Panel:CheckBox(SGLanguage.GetMessage("stool_autoweld"),"stargate_cloaking_autoweld");
-	if(StarGate.HasResourceDistribution) then
+	if CAF then
 		Panel:CheckBox(SGLanguage.GetMessage("stool_autolink"),"stargate_cloaking_autolink"):SetToolTip(SGLanguage.GetMessage("stool_autolink_desc"));
 	end
 end

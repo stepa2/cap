@@ -84,8 +84,8 @@ function ENT:OnRemove()
 end
 
 function ENT:Think()
-    if(self.empty or not self.HasResourceDistribution)then return end;
-	if(self.Entity:SetNetworkedEntity("ZPM",self.Zpm)==NULL)then
+    if self.empty or not CAF then return end;
+	if(self.Entity:GetNetworkedEntity("ZPM",self.Zpm)==NULL)then
 	    self.Entity:SetNetworkedEntity("ZPM",self.Zpm)
 	end
 
@@ -165,7 +165,7 @@ function ENT:Think()
 		active = 0;
 		self.empty = true;
 		self:Skin(2);
-		--if (self.HasRD) then StarGate.WireRD.OnRemove(self,true) end;
+		--if CAF then StarGate.WireRD.OnRemove(self,true) end;
 		self:AddResource("energy",0);
 		self.Connected = false;
 	end

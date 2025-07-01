@@ -54,7 +54,7 @@ end
 function TOOL:ControlsPanel(Panel)
 	Panel:NumSlider(SGLanguage.GetMessage("stool_zpm_mk3_capacity"),"zpm_mk3_capacity",1,100,0);
 	Panel:CheckBox(SGLanguage.GetMessage("stool_autoweld"),"zpm_mk3_autoweld");
-	if(StarGate.HasResourceDistribution) then
+	if CAF then
 		Panel:CheckBox(SGLanguage.GetMessage("stool_autolink"),"zpm_mk3_autolink"):SetToolTip(SGLanguage.GetMessage("stool_autolink_desc"));
 	end
 	Panel:AddControl("Label", {Text = SGLanguage.GetMessage("stool_zpm_mk3_fulldesc")})

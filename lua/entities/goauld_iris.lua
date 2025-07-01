@@ -86,7 +86,7 @@ end
 function ENT:Think()
 	-- have energy check for energy and eat it at same time, shorter code
 	if(self.IsActivated) then
-		if(self.HasRD) then
+		if CAF then
 			local gate = self:FindGate();
 			if IsValid(gate) and gate.IsStargate and not gate:HaveEnergy(true,true) then self:TrueActivate(true) end
 		end
@@ -222,7 +222,7 @@ end
 function ENT:Toggle(ignore_energy)
 	if(self.NextAction <= CurTime()) then
 		local deactivate = false
-		if(self.HasRD and ignore_energy) then
+		if(CAF and ignore_energy) then
 			local gate = self:FindGate();
 			if IsValid(gate) and gate.IsStargate and not gate:HaveEnergy(true,true) then deactivate = true end
 		end
@@ -241,7 +241,7 @@ function ENT:Toggle(ignore_energy)
 			self:SetNWBool("Activated",false);
 		else
 			if (not ignore_energy and IsValid(self.GateLink) and self.GateLink.GateSpawnerSpawned and not self:IsComputer()) then return end
-			if(self.HasRD) then
+			if CAF then
 				local gate = self:FindGate();
 				if IsValid(gate) and gate.IsStargate and not gate:HaveEnergy(true,true) then if (self.Sounds and self.Sounds.Fail) then self.Entity:EmitSound(self.Sounds.Fail,90,math.random(90,110)); end return end
 			end
@@ -285,7 +285,7 @@ function ENT:TrueActivate(deactivate,wire)
 			self:SetNWBool("Activated",false);
 		elseif (not self.IsActivated and not deactivate) then
 			if (not ignore_energy and IsValid(self.GateLink) and self.GateLink.GateSpawnerSpawned and not self:IsComputer()) then return end
-			if(self.HasRD and self.Entity:GetModel() == "models/zup/stargate/sga_shield.mdl") then
+			if(CAF and self.Entity:GetModel() == "models/zup/stargate/sga_shield.mdl") then
 				local gate = self:FindGate();
 				if IsValid(gate) and gate.IsStargate and not gate:HaveEnergy(true,true) then return end
 			end

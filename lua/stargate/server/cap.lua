@@ -330,7 +330,7 @@ function StarGate.CoolGate(gate)
    gate.excessPower = gate.excessPower - energyDissipated
 
    -- What is this? it seems like CONSUME energy with LS3, so i just disable this.
-   --if(StarGate.HasResourceDistribution) then
+   --if CAF then
       -- Reduce the amount of energy the gate can store by the amount dissipated
       -- This will result in the gate returning to its original energy capacity once it has completely cooled
       --StarGate.WireRD.AddResource(gate, "energy", StarGate.GetStargateEnergyCapacity(gate) - energyDissipated)
@@ -645,7 +645,7 @@ function StarGate.GetGateMarker(gate)
 end
 
 function StarGate.GetStargateEnergyCapacity(gate)
-   if(StarGate.HasResourceDistribution && (gate.resources || gate.resources2)) then
+   if CAF and (gate.resources or gate.resources2) then
       return StarGate.WireRD.GetUnitCapacity(gate, "energy")
    else
       return gate.capacity
@@ -653,7 +653,7 @@ function StarGate.GetStargateEnergyCapacity(gate)
 end
 
 function StarGate.SetStargateEnergyCapacity(gate, capacity)
-   if(StarGate.HasResourceDistribution) then
+   if CAF then
       StarGate.WireRD.AddResource(gate, "energy", capacity)
    end
 
@@ -676,7 +676,7 @@ function StarGate.MakeStargateUseEnergy(gate)
       if(StarGate.IsStargateOutbound(gate)) then
          local energyConsumed = 0
 
-         if(StarGate.HasResourceDistribution) then
+         if CAF then
             energyConsumed = StarGate.WireRD.ConsumeResource(gate, "energy", energyDrain)
          else
             energyConsumed = math.min(energyDrain, gate.energy)
@@ -686,7 +686,7 @@ function StarGate.MakeStargateUseEnergy(gate)
          if(energyConsumed < energyDrain) then
             gate:DeactivateStargate()
          end
-      elseif(!StarGate.HasResourceDistribution) then
+      elseif not CAF then
          gate.energy = math.min(gate.energy + (gateCapacity * StarGate.CYCLE_INTERVAL / rechargeTime), gateCapacity)
       end
 
@@ -698,8 +698,8 @@ function StarGate.MakeStargateUseEnergy(gate)
    gate.ActivateStargate = function(...)
       gate.backups.ActivateStargate(gate, ...)
 
-      if((StarGate.HasResourceDistribution && StarGate.WireRD.GetResource(gate, "energy") <= 0) ||
-         (gate.energy && gate.energy <= 0)) then
+      if((CAF and StarGate.WireRD.GetResource(gate, "energy") <= 0) or
+         (gate.energy and gate.energy <= 0)) then
          if (IsValid(gate.overloader)) then
          	gate.overloader:StopFiring();
          end

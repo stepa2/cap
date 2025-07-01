@@ -35,7 +35,7 @@ net.Receive("_sg_convars",function(len,ply)
 		for k,v in pairs(convars_cache) do
 			net.WriteString(k);
 			if (k=="stargate_has_rd") then
-				net.WriteUInt(StarGate.HasResourceDistribution and 1 or 0,20);
+				net.WriteUInt(CAF and 1 or 0,20);
 			else
 				net.WriteUInt(GetConVarNumber(k),20);
 			end

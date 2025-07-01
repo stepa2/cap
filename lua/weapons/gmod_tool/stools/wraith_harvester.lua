@@ -133,7 +133,7 @@ function TOOL:ControlsPanel(Panel)
 	Panel:AddControl("PropSelect",{Label=SGLanguage.GetMessage("stool_model"),ConVar="wraith_harvester_model",Category="",Models=self.Models});
 	Panel:CheckBox(SGLanguage.GetMessage("stool_wraith_harvester_beam"),"wraith_harvester_always_down");
 	Panel:CheckBox(SGLanguage.GetMessage("stool_autoweld"),"wraith_harvester_autoweld");
-	if(StarGate.HasResourceDistribution) then
+	if CAF then
 		Panel:CheckBox(SGLanguage.GetMessage("stool_autolink"),"wraith_harvester_autolink"):SetToolTip(SGLanguage.GetMessage("stool_autolink_desc"));
 	end
 end

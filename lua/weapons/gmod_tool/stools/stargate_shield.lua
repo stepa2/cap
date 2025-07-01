@@ -208,7 +208,7 @@ function TOOL:ControlsPanel(Panel)
 	end
 	Panel:CheckBox(SGLanguage.GetMessage("stool_stargate_shield_an"), "stargate_shield_anti_noclip"):SetToolTip(SGLanguage.GetMessage("stool_stargate_shield_an_desc"));
 	Panel:CheckBox(SGLanguage.GetMessage("stool_autoweld"),"stargate_shield_autoweld");
-	if(StarGate.HasResourceDistribution) then
+	if CAF then
 		Panel:CheckBox(SGLanguage.GetMessage("stool_autolink"),"stargate_shield_autolink"):SetToolTip(SGLanguage.GetMessage("stool_autolink_desc"));
 	end
 end

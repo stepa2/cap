@@ -116,7 +116,7 @@ function TOOL.BuildCPanel(panel)
 	end
 
     panel:CheckBox(SGLanguage.GetMessage("stool_autoweld"),"naq_gen_mks_autoweld");
-	if(StarGate.HasResourceDistribution) then
+	if CAF then
 		panel:CheckBox(SGLanguage.GetMessage("stool_autolink"),"naq_gen_mks_autolink"):SetToolTip(SGLanguage.GetMessage("stool_autolink_desc"));
 	end
 	panel:AddControl("Header",

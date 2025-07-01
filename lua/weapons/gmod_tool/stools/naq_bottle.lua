@@ -47,7 +47,7 @@ end
 
 function TOOL:ControlsPanel(Panel)
 	Panel:CheckBox(SGLanguage.GetMessage("stool_autoweld"),"naq_bottle_autoweld");
-	if(StarGate.HasResourceDistribution) then
+	if CAF then
 		Panel:CheckBox(SGLanguage.GetMessage("stool_autolink"),"naq_bottle_autolink"):SetToolTip(SGLanguage.GetMessage("stool_autolink_desc"));
 	end
 	Panel:AddControl("Label", {Text = SGLanguage.GetMessage("stool_naq_bottle_fulldesc"),})

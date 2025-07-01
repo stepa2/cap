@@ -99,7 +99,7 @@ end
 function ENT:Think()
 	-- have energy check for energy and eat it at same time, shorter code
 	if(self.IsActivated) then
-		if(self.HasRD and self.Entity:GetModel() == "models/zup/stargate/sga_shield.mdl") then
+		if(CAF and self.Entity:GetModel() == "models/zup/stargate/sga_shield.mdl") then
 			local gate = self:FindGate();
 			if IsValid(gate) and gate.IsStargate and not gate:HaveEnergy(true,true) then self:TrueActivate(true) end
 		end
@@ -158,7 +158,7 @@ function ENT:Toggle(ignore_energy)
 	if (IsValid(gate) and gate.NoxDialingType and not gate.NoxIrisReactivated) then gate.NoxIrisReactivated = true; reactivate = true; end
 	if(self.NextAction <= CurTime() or reactivate) then
 		local deactivate = false
-		if(self.HasRD and ignore_energy and self.Entity:GetModel() == "models/zup/stargate/sga_shield.mdl") then
+		if(CAF and ignore_energy and self.Entity:GetModel() == "models/zup/stargate/sga_shield.mdl") then
 			if IsValid(gate) and gate.IsStargate and not gate:HaveEnergy(true,true) then deactivate = true end
 		end
 		if(self.IsActivated or deactivate) then
@@ -175,7 +175,7 @@ function ENT:Toggle(ignore_energy)
 			self:SetNWBool("Activated",false);
 		else
 			if (not ignore_energy and IsValid(self.GateLink) and self.GateLink.GateSpawnerSpawned and not self:IsComputer()) then return end
-			if(self.HasRD and self.Entity:GetModel() == "models/zup/stargate/sga_shield.mdl") then
+			if(CAF and self.Entity:GetModel() == "models/zup/stargate/sga_shield.mdl") then
 				local gate = self:FindGate();
 				if IsValid(gate) and gate.IsStargate and not gate:HaveEnergy(true,true) then if (self.Action and self.Action.Sounds and self.Action.Sounds.Fail) then self.Entity:EmitSound(self.Action.Sounds.Fail,90,math.random(90,110)); end return end
 			end
@@ -222,7 +222,7 @@ function ENT:TrueActivate(deactivate,wire)
 				end
 				return
 			end
-			if(self.HasRD and self.Entity:GetModel() == "models/zup/stargate/sga_shield.mdl") then
+			if(CAF and self.Entity:GetModel() == "models/zup/stargate/sga_shield.mdl") then
 				local gate = self:FindGate();
 				if IsValid(gate) and gate.IsStargate and not gate:HaveEnergy(true,true) then return end
 			end

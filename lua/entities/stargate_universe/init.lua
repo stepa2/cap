@@ -1040,7 +1040,7 @@ function ENT:OnRemove()
 	if(self.RollSound)then
 	    self.RollSound:Stop();
 	end
-	if (self.HasRD) then StarGate.WireRD.OnRemove(self) end;
+	if CAF then StarGate.WireRD.OnRemove(self) end;
 	self:RemoveGateFromList();
 end
 

@@ -181,7 +181,7 @@ function ENT:Initialize()
 	self:SetIsFiring(false)
 
 	-- Set resources
-	if(self.HasRD) then
+	if CAF then
 		self:AddResource("energy", 1)
 	end
 
@@ -345,7 +345,7 @@ function ENT:Think()
 		end
 	end
 
-   if(self.HasRD and self.isActive) then
+   if(CAF and self.isActive) then
       local energyAvailable = self:GetResource("energy")
       self:ConsumeResource("energy", self.energyPerCycle*100)
       -- If there isn't enough energy left to power the beam for another second, stop firing
@@ -379,7 +379,7 @@ function ENT:Startup()
 
 	self:SetLocalGate(self.localGate) -- Sets the local gate as a networked entity
        /*
-	if(self.HasRD) then
+	if CAF then
 		-- Allow the overloader to store the energy it needs for one second of fire
 		self:AddResource("energy", self.energyPerSecond)
 	end */
@@ -397,7 +397,7 @@ function ENT:Shutdown()
 
 	self:StopFiring()
               /*
-	if(self.HasRD) then
+	if CAF then
 		-- Remove energy storage while the device is not active
 		self:AddResource("energy", 1)
 	end         */
@@ -455,7 +455,7 @@ function ENT:FireBeam()
 		return false
 	end
 
-	if(self.HasRD) then
+	if CAF then
 		local energyAvailable = self:GetResource("energy")
 
 		-- If there isn't enough energy left to power the beam for another second, stop firing

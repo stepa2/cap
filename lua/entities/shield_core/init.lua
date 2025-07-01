@@ -92,7 +92,7 @@ function ENT:Initialize()
 		self:SetMultiplier(tonumber(args[1]));
 		self.Immunity = util.tobool(tonumber(args[2]));
 		self.Draw = util.tobool(tonumber(args[3]));
-		self.Atlantis = util.tobool(tonumber(args[4])) and self.HasResourceDistribution; -- this is working only with power attached, so it need RS
+		self.Atlantis = util.tobool(tonumber(args[4])) and CAF; -- this is working only with power attached, so it needs RD
 
   		numpad.OnDown(self.Owner, tonumber(args[5]), "Toggle_Shield_Core", self.Entity);
 
@@ -359,7 +359,7 @@ function ENT:Think(ply)
 					self.Shield:SetNetworkedBool("depleted",false); -- For the traceline class - Clientside
 					self:SetWire("Active",1);
 				end
-			elseif(enabled and self.HasResourceDistribution and self.ConsumeMultiplier ~= 0) then
+			elseif(enabled and CAF and self.ConsumeMultiplier ~= 0) then
 				-- Consume energy
 				local energy = self:GetResource("energy");
 
@@ -456,7 +456,7 @@ function ENT:Regenerate(enabled)
 			multiplier = multiplier*2.5;
 		end
 		-- Consume energy when restoring the strength
-		if(StarGate.HasResourceDistribution) then
+		if CAF then
 			local energy = self:GetResource("energy");
 			local speed = math.Clamp(energy/5000,1,4); -- Can make up to 4 times faster to regenerate with enough power connected (ZPMs, resource Caches etc)
 			multiplier = math.floor(multiplier*speed);

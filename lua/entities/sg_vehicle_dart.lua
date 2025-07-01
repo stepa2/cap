@@ -265,11 +265,6 @@ end
 
 
 function ENT:Power(supply)
-	/*if(StarGate.RDThree()) then
-		RD.Link(self.Harvester,supply)
-	else
-		Dev_Link(self.Harvester,supply)
-	end*/
 end
 
 if (StarGate and StarGate.CAP_GmodDuplicator) then

@@ -13,12 +13,7 @@ ENT.WireDebugName = "ZPM Hub Mk2"
 
 ENT.Spawnable = false
 ENT.AdminSpawnable = false
-
-if (Environments) then
-	ENT.IsNode = false
-else
-	ENT.IsNode = true
-end
+ENT.IsNode = true
 
 ENT.ZPMHub = true
 
@@ -55,8 +50,6 @@ function ENT:Initialize()
 		self:SetNetworkedInt( "netid", self.netid );
 		self.range = 2048;
 		self:SetNetworkedInt( "range", self.range );
-	elseif ( RES_DISTRIB == 2 ) then
-		self:AddResource("energy",1)
 	end
 
 	self.ZPMs = {{On=false,Ent=nil,IsValid=false,Dir=1,Dist=1,Eject=0,Type="ZPH",SoundIn=0,SoundOut=0},{On=false,Ent=nil,IsValid=false,Dir=1,Dist=1,Eject=0,Type="ZPH",SoundIn=0,SoundOut=0},{On=false,Ent=nil,IsValid=false,Dir=1,Dist=1,Eject=0,Type="ZPH",SoundIn=0,SoundOut=0}};
@@ -368,22 +361,11 @@ end
 function ENT:HubLink(ent)
 	if CAF then
 		CAF.LibRD.Link(ent,self.netid);
-	elseif Environments then
-		ent:Link(self.node);
-		if (self.node) then
-			self.node:Link(ent);
-		end
-	elseif ( RES_DISTRIB == 2 ) then
-		Dev_Link(ent,self, nil, nil, nil, nil, nil);
 	end
 end
 function ENT:HubUnlink(ent)
 	if CAF then
 		CAF.LibRD.Unlink(ent);
-	elseif Environments then
-		ent:Unlink();
-	elseif ( RES_DISTRIB == 2 and Dev_Unlink_All) then
-		Dev_Unlink_All(ent);
 	end
 end
 
@@ -493,58 +475,6 @@ function ENT:PostEntityPaste(Player, Ent, CreatedEntities)
 		end
 	end
 	StarGate.WireRD.PostEntityPaste(self,Player,Ent,CreatedEntities)
-end
-
-if (Environments) then
-		ENT.Link = function(self, ent, delay)
-			if self.node and IsValid(self.node) then
-				self:Unlink()
-				for i,v in ipairs(self.ZPMs) do
-					if (IsValid(v.Ent) and v.Dist == 0 and v.Ent.node and IsValid(v.Ent.node)) then
-						v.Ent:Unlink()
-					end
-				end
-			end
-			if ent and ent:IsValid() then
-				for i,v in ipairs(self.ZPMs) do
-					if (IsValid(v.Ent) and v.Dist == 0) then
-						v.Ent:Link(ent)
-						ent:Link(v.Ent)
-					end
-				end
-				self.node = ent
-
-				if delay then
-					timer.Simple(0.1, function()
-						umsg.Start("Env_SetNodeOnEnt")
-							umsg.Short(self:EntIndex())
-							umsg.Short(ent:EntIndex())
-						umsg.End()
-					end)
-				else
-					umsg.Start("Env_SetNodeOnEnt")
-						umsg.Short(self:EntIndex())
-						umsg.Short(ent:EntIndex())
-					umsg.End()
-				end
-				--self:SetNWEntity("node", ent)
-			end
-		end
-	ENT.Unlink = function(self)
-		if self.node then
-			for i,v in ipairs(self.ZPMs) do
-				if (IsValid(v.Ent) and v.Dist == 0 and v.Ent.node and IsValid(v.Ent.node)) then
-					v.Ent:Unlink()
-				end
-			end
-			self.node:Unlink(self)
-			self.node = nil
-			umsg.Start("Env_SetNodeOnEnt")
-				umsg.Short(self:EntIndex())
-				umsg.Short(0)
-			umsg.End()
-		end
-	end
 end
 
 end

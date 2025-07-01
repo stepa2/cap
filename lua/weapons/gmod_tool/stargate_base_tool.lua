@@ -200,45 +200,12 @@ end
 
 --################# Automatically links two SENTs, when they use Resource Distribution if installed @aVoN
 function TOOL:AutoLink(e1,e2)
-	if(not StarGate.HasResourceDistribution) then return end
+	
 	-- Is resource distribution installed?
-	if(e1 and e2 and e1:IsValid() and e2:IsValid() and e1 ~= e2) then
-		if (Dev_Link) then
-			-- First is for RD1, second for RD2
-			local e1_res = e1.resources or e1.resources2;
-			local e2_res = e2.resources or e2.resources2;
-			if(e1_res and e2_res) then
-				-- Devices needs that power?
-				local match = false;
-				for _,res1 in pairs(e1_res) do
-					for _,res2 in pairs(e2_res) do
-						if (res1.res_ID == res2.res_ID) then
-							match = true;
-							break;
-						end
-					end
-					if(match) then break end;
-				end
-				if(not match) then return end;
-				-- Devide already linked with that (Normally not, but just to be sure)?
-				for _,res in pairs(e1_res) do
-					for _,v in pairs(res.links) do
-						if (e2 == v.ent) then
-							return;
-						end
-					end
-				end
-				-- Create an invisible link
-				Dev_Link(e1,e2,e1:GetPos(),e2:GetPos(),"cable/cable2",Color(0,0,0,0),0);
-			end
-		elseif CAF then
+	if IsValid(e1) and IsValid(e2) and e1 ~= e2 then
+		if CAF then
 			if e2.IsNode then
 				CAF.LibRD.Link(e1,e2.netid);
-			end
-		elseif (Environments) then
-			if (e2.IsNode) then
-				e1:Link(e2);
-				e2:Link(e1);
 			end
 		end
 	end

@@ -59,8 +59,8 @@ function ENT:Initialize()
 end
 
 function ENT:Think()
-
-	if(not self.HasResourceDistribution) then return end;
+	if not CAF then retrun end
+	
 
 	if(self.Active) then
 		//self.ActiveTime = math.Approach(self.ActiveTime,60,1)
@@ -96,7 +96,7 @@ function ENT:Think()
 		end
 
 		if(self.depleted) then
-			--if (self.HasRD) then StarGate.WireRD.OnRemove(self,true) end;
+			--if CAF then StarGate.WireRD.OnRemove(self,true) end;
 			self:AddResource("energy",0);
 			self:SetWire("Active",0);
 			self:SetWire("Naquadah",0);

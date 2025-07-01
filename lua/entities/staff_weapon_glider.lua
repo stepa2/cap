@@ -73,7 +73,7 @@ end
 --################### Adds one of those annoying speechbubbles to the staff-weapon @aVoN
 function ENT:UpdateOverlayText()
 	local shots = "";
-	if(self.HasResourceDistribution) then
+	if CAF then
 		shots = "\nShots: "..math.floor((tonumber(self:GetResource("energy")) or 0)/self.energy_drain);
 	end
 	local add = "";

@@ -49,7 +49,7 @@ function ENT:Use(ply)
 end
 
 function ENT:DialMenu()
-	//if(self.HasRD) then self.Entity:Power(); end
+	//if CAF then self.Entity:Power(); end
 	if(hook.Call("StarGate.Player.CanDialGate",GAMEMODE,self.Owner,self.Gates) == false) then return end;
 	net.Start("StarGate.VGUI.Menu");
 	net.WriteEntity(self.Gates);

@@ -236,12 +236,6 @@ function ENT:Think()
 
 	self:SendData()
 
-	/*if(self.HasRD) then
-		if(self.FirstPerson) then
-			self:Sense()
-		end
-	end*/
-
 	if(IsValid(self.Owner)) then
 		local dist = (self.Owner:GetPos() - self:GetPos()):Length();
 		if(dist>5000) then

@@ -116,7 +116,7 @@ function ENT:WireActivateStargate(inbound)
 	 -- prepare power calculations, and check for energy
 	self:CheckConnection() -- prepare power calculations
 	self.NoxDialingType = false;
-	if (self.HasRD and not self:CheckEnergy() and not self.Dialling and not inbound) then
+	if (CAF and not self:CheckEnergy() and not self.Dialling and not inbound) then
 		local action = self.Sequence:New();
 		action = self.Sequence:SeqChevron7Lock(table.getn(self.DialledAddress)-1,self.DialledAddress,true) + self.Sequence:DialFail(false,true,true);
 		self:RunActions(action);

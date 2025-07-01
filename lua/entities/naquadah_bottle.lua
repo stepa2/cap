@@ -69,36 +69,40 @@ function ENT:Think()
 		end
 		self.resfix = true;
 	end */
-	if(self.depleted or not self.HasResourceDistribution) then self.Entity:NextThink(CurTime()+0.5); return true; end;
-		local energy = self:GetResource("energy");
-		local NE = self.Naquadah;
-		local my_capacity = self:GetUnitCapacity("energy");
-		local nw_capacity = self:GetNetworkCapacity("energy");
-		local percent = (NE/self.MaxEnergy)*100;
-		if(not self.disabled) then
-			self.resfix = false;
-			if(StarGate.WireRD.Connected(self)) then -- We are connected to a network - Enable Naquadah
-				if(not self.enabled) then
-					self.Entity:SetMaterial("models/sandeno/liquid.vmt");
-					self.enabled = true;
-				end
-			else
-				if(self.enabled) then
-					self.Entity:SetMaterial("");
-					self.enabled = false;
-				end
+	if self.depleted or not CAF then 
+		self.Entity:NextThink(CurTime()+0.5) return true 
+	end
+
+	local energy = self:GetResource("energy");
+	local NE = self.Naquadah;
+	local my_capacity = self:GetUnitCapacity("energy");
+	local nw_capacity = self:GetNetworkCapacity("energy");
+	local percent = (NE/self.MaxEnergy)*100;
+	if(not self.disabled) then
+		self.resfix = false;
+		if(StarGate.WireRD.Connected(self)) then -- We are connected to a network - Enable Naquadah
+			if(not self.enabled) then
+				self.Entity:SetMaterial("models/sandeno/liquid.vmt");
+				self.enabled = true;
 			end
 		else
-			self.enabled = false;
+			if(self.enabled) then
+				self.Entity:SetMaterial("");
+				self.enabled = false;
+			end
 		end
-		-- No Naquadah Energy available anymore - We are depleted!
-		if(NE <= 0) then
-			self:AddResource("energy",0);
-			timer.Simple(0.1,function() if IsValid(self) then self:SetMaterial("models/sandeno/base.vmt"); end end)
-			self.depleted = true;
-			self.enabled = false;
-			self:SetOverlayText("Naquada Bottle\nDepleted");
-		end
+	else
+		self.enabled = false;
+	end
+	-- No Naquadah Energy available anymore - We are depleted!
+	if(NE <= 0) then
+		self:AddResource("energy",0);
+		timer.Simple(0.1,function() if IsValid(self) then self:SetMaterial("models/sandeno/base.vmt"); end end)
+		self.depleted = true;
+		self.enabled = false;
+		self:SetOverlayText("Naquada Bottle\nDepleted");
+	end
+
 	-- Energy conversion when availeble storage @Anorr,aVoN
 	if(self.enabled and not self.disabled and energy < nw_capacity) then
 		local rate = (my_capacity+nw_capacity)/2; -- Two passes until it filled the full network

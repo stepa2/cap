@@ -70,7 +70,7 @@ end
 --################# Think
 function ENT:Think()
 
-	if(self.depleted or not self.HasResourceDistribution) then return end;
+	if(self.depleted or not CAF) then return end;
 	--if not self.On then return end;
 
 	if self.On then
@@ -101,7 +101,7 @@ function ENT:Think()
 			self:Off()
 		end
 		if(self.depleted) then
-			--if (self.HasRD) then StarGate.WireRD.OnRemove(self,true) end;
+			--if CAF then StarGate.WireRD.OnRemove(self,true) end;
 			self:AddResource("energy",0);
 			self:SetWire("Active",-1);
 			self:SetWire("Naquadah",0);

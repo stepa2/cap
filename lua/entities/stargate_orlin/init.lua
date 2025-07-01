@@ -360,7 +360,7 @@ function ENT:OnRemove()
 	if(IsValid(self.Ramp))then
 	    self.Ramp:Remove();
 	end
-	if (self.HasRD) then StarGate.WireRD.OnRemove(self) end;
+	if CAF then StarGate.WireRD.OnRemove(self) end;
 	self:RemoveGateFromList();
 end
 

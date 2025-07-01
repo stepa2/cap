@@ -136,7 +136,7 @@ function ENT:Initialize()
 	end
 
 	-- Energy support
-	if (self.HasRD) then
+	if CAF then
 		self:AddResource("energy",1);
 		self:SetNetworkedBool("HAS_RD",true);
 	end
@@ -242,13 +242,13 @@ end
 function ENT:LowPriorityThink()
 	-- have energy check for energy and eat it at same time, shorter code
 	if(self.Outbound) then
-		if(self.HasRD and self.IsOpen and IsValid(self.EventHorizon) and self.EventHorizon:IsOpen()) then
+		if(CAF and self.IsOpen and IsValid(self.EventHorizon) and self.EventHorizon:IsOpen()) then
 			if not self:HaveEnergy() then self:Disconnect() end
 		end
 	end
 	if not self.IsOpen and self.Jumped then self.Jumped = false; end
 	if not self.IsOpen and self.WormHoleJumpDMG>0 then self.WormHoleJumpDMG = 0; end
-	if (self.HasRD) then
+	if CAF then
 		local energy = self.Entity:GetResource("energy");
 		if (self.Entity:GetNetworkedInt("RD_ENERGY",0) != energy) then
 			self.Entity:SetNetworkedInt("RD_ENERGY",energy);
@@ -759,7 +759,7 @@ function ENT:TransferResource(resname,value)
 		NextTransfer = self.NextResTransfer
 		MaxTransfer = self.MaxResTransfer
 	end
-	if not self.HasRD or not value or not Transfer then return -1; end
+	if not CAF or not value or not Transfer then return -1; end
 	if not is_energy and table.Count(self.ResTransferClasses)>0 and not self.ResTransferClasses[resname] then return -1 end
 	if NextTransfer and NextTransfer>CurTime() then return 0; end
 	if self.IsOpen and IsValid(self.Target) and self.Target.IsOpen then

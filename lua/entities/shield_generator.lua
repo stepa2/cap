@@ -201,7 +201,7 @@ function ENT:Think()
 				self.Shield:AddAthmosphere();
 			end
 		end
-	elseif(enabled and self.HasResourceDistribution and self.ConsumeMultiplier ~= 0) then
+	elseif(enabled and CAF and self.ConsumeMultiplier ~= 0) then
 		-- Consume energy
 		local energy = self:GetResource("energy");
 		-- Make the shield consume more power depending on it's strength
@@ -283,7 +283,7 @@ function ENT:Regenerate(enabled)
 			multiplier = multiplier*2.5;
 		end
 		-- Consume energy when restoring the strength
-		if(StarGate.HasResourceDistribution) then
+		if CAF then
 			local energy = self:GetResource("energy");
 			local speed = math.Clamp(energy/5000,1,4); -- Can make up to 4 times faster to regenerate with enough power connected (ZPMs, resource Caches etc)
 			multiplier = math.floor(multiplier*speed);

@@ -206,7 +206,7 @@ function TOOL:ControlsPanel(Panel)
 	Panel:CheckBox(SGLanguage.GetMessage("stool_staff_weapon_explosion"),"staff_weapon_explosion");
 	--Panel:CheckBox("Colorize Explosion","staff_weapon_explosion_colorize");
 	Panel:CheckBox(SGLanguage.GetMessage("stool_autoweld"),"staff_weapon_autoweld");
-	if(StarGate.HasResourceDistribution) then
+	if CAF then
 		Panel:CheckBox(SGLanguage.GetMessage("stool_autolink"),"staff_weapon_autolink"):SetToolTip(SGLanguage.GetMessage("stool_autolink_desc"));
 	end
 end

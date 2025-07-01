@@ -78,7 +78,7 @@ function ENT:Shoot()
 
 	local energy = self:GetResource("energy",self.energy_drain);
 
-	if(energy > self.energy_drain or !self.HasResourceDistribution) then
+	if(energy > self.energy_drain or not CAF) then
 
 		self:ConsumeResource("energy",self.energy_drain);
 

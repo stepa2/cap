@@ -136,7 +136,7 @@ end
 function ENT:Shoot()
 	local energy = self:GetResource("energy");
 
-	if(energy > self.energy_drain or !self.HasRD) then
+	if(energy > self.energy_drain or not CAF) then
 
 		local FiringPos = self.Entity:GetPos() + self.Entity:GetUp()*30;
 		local ShootDir = (self.Target - FiringPos):GetNormal();

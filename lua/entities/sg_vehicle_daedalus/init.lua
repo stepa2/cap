@@ -60,7 +60,7 @@ function ENT:Initialize()
 	--self.Entity:SpawnRotor();
 	--self.Entity:SpawnLight();
 
-	-- if (self.HasRD) then
+	-- if CAF then
 		-- self.Entity:SpawnPower();
 		-- self.Entity:ConnectPower(self.ZPM);
 	-- end
@@ -142,12 +142,6 @@ end
 -----------------------------------POWER----------------------------------
 
 -- function ENT:ConnectPower(source)
-
-	-- Dev_Link(self.Transporter, source);
-	-- for i=1,6 do
-		-- Dev_Link(self.Railgun[i], source);
-		-- Dev_Link(self.AsgardBeam[i], source);
-	-- end
 
 -- end
 

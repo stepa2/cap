@@ -86,7 +86,7 @@ function ENT:Initialize()
 	local size = 10;
 	self.Entity:SetCollisionBounds(Vector(-size,-size,-size),Vector(size,size,size))
 
-	if self.HasRD then
+	if CAF then
 		for k, res in pairs(self.Resources) do
 			self:AddResource(res, self.MaxAmount)
 		end
@@ -107,7 +107,7 @@ end
 
 function ENT:Think()
 	if (not IsValid(self)) then return false end;
-	if self.HasRD then
+	if CAF then
 		for k, res in pairs(self.Resources) do
 			if(self:GetResource(res) < self.MaxAmount) then
 				self:SupplyResource(res, self.MaxAmount)

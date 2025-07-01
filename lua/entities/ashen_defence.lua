@@ -138,7 +138,7 @@ function ENT:Think(ply)
 	local energy = self:GetResource("energy");
 	local en = StarGate.CFG:Get("ashen_defence","req_energy",true);
 
-	if(energy > self.energy_drain or !self.HasRD or !en) then
+	if(energy > self.energy_drain or not CAF or !en) then
 
 		if (self.WireActive == 1 and not self.Destroyed) then
 

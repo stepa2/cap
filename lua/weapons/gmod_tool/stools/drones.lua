@@ -151,7 +151,7 @@ function TOOL:ControlsPanel(Panel)
 	end
 	Panel:AddControl("PropSelect",{Label=SGLanguage.GetMessage("stool_model"),ConVar="drones_model",Category="",Models=self.Models});
 	Panel:CheckBox(SGLanguage.GetMessage("stool_autoweld"),"drones_autoweld");
-	if(StarGate.HasResourceDistribution) then
+	if CAF then
 		Panel:CheckBox(SGLanguage.GetMessage("stool_autolink"),"drones_autolink"):SetToolTip(SGLanguage.GetMessage("stool_autolink_desc"));
 	end
 end

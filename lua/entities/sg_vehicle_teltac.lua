@@ -223,7 +223,7 @@ function ENT:Think()
 	self.BaseClass.Think(self)
 
 
-	if self.HasRD then
+	if CAF then
 		self:LSSupport()
 	end
 
@@ -702,15 +702,9 @@ function ENT:LSSupport()
 		for _,p in pairs(player.GetAll()) do -- Find all players
 			local pos = (p:GetPos()-ent_pos):Length(); -- Where they are in relation to the jumper
 			if(pos<800 and p.suit) then -- If they're close enough
-				if(not(StarGate.RDThree())) then
-					p.suit.air = 100; -- They get air
-					p.suit.energy = 100; -- and energy
-					p.suit.coolant = 100; -- and coolant
-				else
-					p.suit.air = 200; -- We need double the amount of LS3(No idea why)
-					p.suit.coolant = 200;
-					p.suit.energy = 200;
-				end
+				p.suit.air = 200;
+				p.suit.coolant = 200;
+				p.suit.energy = 200;
 			end
 		end
 	end
