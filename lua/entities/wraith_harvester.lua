@@ -36,8 +36,6 @@ end
 
 if SERVER then
 
---################# Header
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("extra")) then return end
 -- Includes
 AddCSLuaFile();
 -- Defines

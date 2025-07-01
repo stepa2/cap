@@ -404,9 +404,8 @@ hook.Add( "StargateTab", "AddEntityContent", function( pnlContent, tree, node )
 
 	StargateAddTab(Categorised, pnlContent, tree, node)
 
-	if (StarGate.CheckModule("misc")) then
 	local node = tree:AddNode( SGLanguage.GetMessage("cap_prop_cat"), "icon16/folder.png", true );
-
+	do
 	--node.DoPopulate = function(self)
   		local self = node;
 		-- If we've already populated it - forget it.
@@ -451,6 +450,7 @@ hook.Add( "StargateTab", "AddEntityContent", function( pnlContent, tree, node )
 			end
 		end
 	--end
+	end
     /*
 	-- If we click on the node populate it and switch to it.
 	node.DoClick = function( self )
@@ -463,7 +463,6 @@ hook.Add( "StargateTab", "AddEntityContent", function( pnlContent, tree, node )
 		end
 
 	end */
-	end
 
 	local node = tree:AddNode( SGLanguage.GetMessage("spawninfo_title"), "icon16/information.png", true );
     /*
@@ -623,38 +622,32 @@ function StarGate.Hook.AddToolTab()
 	-- Add Config Category
 	local config_name = SGLanguage.GetMessage("stool_cat_config");
 	local keys_name = SGLanguage.GetMessage("stool_cat_keys");
-	if (StarGate.CheckModule("base")) then spawnmenu.AddToolCategory(cat_name,config_name," "..config_name); end
-	if (StarGate.CheckModule("base")) then spawnmenu.AddToolCategory(cat_name,SGLanguage.GetMessage("stool_cat_tech"),SGLanguage.GetMessage("stool_cat_tech")); end
-	if (StarGate.CheckModule("energy")) then spawnmenu.AddToolCategory(cat_name,SGLanguage.GetMessage("stool_cat_energy"),SGLanguage.GetMessage("stool_cat_energy")); end
-	if (StarGate.CheckModule("entweapon")) then spawnmenu.AddToolCategory(cat_name,SGLanguage.GetMessage("stool_cat_weapons"),SGLanguage.GetMessage("stool_cat_weapons")); end
-	if (StarGate.CheckModule("extra")) then spawnmenu.AddToolCategory(cat_name,SGLanguage.GetMessage("stool_cat_ramps"),SGLanguage.GetMessage("stool_cat_ramps")); end
-	if (StarGate.CheckModule("base") or StarGate.CheckModule("ships")) then spawnmenu.AddToolCategory(cat_name,keys_name,keys_name); end
+	spawnmenu.AddToolCategory(cat_name,config_name," "..config_name);
+	spawnmenu.AddToolCategory(cat_name,SGLanguage.GetMessage("stool_cat_tech"),SGLanguage.GetMessage("stool_cat_tech"));
+	spawnmenu.AddToolCategory(cat_name,SGLanguage.GetMessage("stool_cat_energy"),SGLanguage.GetMessage("stool_cat_energy"));
+	spawnmenu.AddToolCategory(cat_name,SGLanguage.GetMessage("stool_cat_weapons"),SGLanguage.GetMessage("stool_cat_weapons"));
+	spawnmenu.AddToolCategory(cat_name,SGLanguage.GetMessage("stool_cat_ramps"),SGLanguage.GetMessage("stool_cat_ramps"));
+	spawnmenu.AddToolCategory(cat_name,keys_name,keys_name);
 
 	-- Add the entry for config
 	spawnmenu.AddToolMenuOption(cat_name,config_name,SGLanguage.GetMessage("stool_credits")," "..SGLanguage.GetMessage("stool_credits"),"","",StarGate.Update_Check);
 	spawnmenu.AddToolMenuOption(cat_name,config_name,SGLanguage.GetMessage("stool_settings")," "..SGLanguage.GetMessage("stool_settings"),"","",StarGate_Settings);
-	if (StarGate.CheckModule("entweapons") or StarGate.CheckModule("weapons")) then spawnmenu.AddToolMenuOption(cat_name,config_name,SGLanguage.GetMessage("stool_weapvis")," "..SGLanguage.GetMessage("stool_weapvis"),"","",StarGate.WeaponVisualSettings,{SwitchConVar="cl_stargate_visualsweapon"}); end
+	spawnmenu.AddToolMenuOption(cat_name,config_name,SGLanguage.GetMessage("stool_weapvis")," "..SGLanguage.GetMessage("stool_weapvis"),"","",StarGate.WeaponVisualSettings,{SwitchConVar="cl_stargate_visualsweapon"});
 	spawnmenu.AddToolMenuOption(cat_name,config_name,SGLanguage.GetMessage("stool_miscvis")," "..SGLanguage.GetMessage("stool_miscvis"),"","",StarGate.MiscVisualSettings,{SwitchConVar="cl_stargate_visualsmisc"});
-	if (StarGate.CheckModule("ship")) then spawnmenu.AddToolMenuOption(cat_name,config_name,SGLanguage.GetMessage("stool_shipvis")," "..SGLanguage.GetMessage("stool_shipvis"),"","",StarGate.ShipVisualSettings,{SwitchConVar="cl_stargate_visualsship"}); end
+	spawnmenu.AddToolMenuOption(cat_name,config_name,SGLanguage.GetMessage("stool_shipvis")," "..SGLanguage.GetMessage("stool_shipvis"),"","",StarGate.ShipVisualSettings,{SwitchConVar="cl_stargate_visualsship"});
 	spawnmenu.AddToolMenuOption(cat_name,config_name,SGLanguage.GetMessage("cl_sets_title")," "..SGLanguage.GetMessage("cl_sets_title"),"","",StarGate.ClientSettings);
 	
 	
 	-- Keybinders
-	if (StarGate.CheckModule("ships")) then
-		spawnmenu.AddToolMenuOption(cat_name,keys_name,"Daedalus"," "..SGLanguage.GetMessage("stool_key_daedalus"),"","",StarGate.DaedalusSettings);
-		spawnmenu.AddToolMenuOption(cat_name,keys_name,"Dart"," "..SGLanguage.GetMessage("stool_key_dart"),"","",StarGate.DartSettings);
-		spawnmenu.AddToolMenuOption(cat_name,keys_name,"GateGlider"," "..SGLanguage.GetMessage("stool_key_glider"),"","",StarGate.GateGliderSettings);
-		spawnmenu.AddToolMenuOption(cat_name,keys_name,"Death Glider"," "..SGLanguage.GetMessage("stool_key_dglider"),"","",StarGate.DeathGliderSettings);
-		spawnmenu.AddToolMenuOption(cat_name,keys_name,"F302"," "..SGLanguage.GetMessage("stool_key_f302"),"","",StarGate.F302Settings);
-		spawnmenu.AddToolMenuOption(cat_name,keys_name,"Jumper"," "..SGLanguage.GetMessage("stool_key_jumper"),"","",StarGate.JumperSettings);
-	end
-	if (StarGate.CheckModule("base")) then
-		spawnmenu.AddToolMenuOption(cat_name,keys_name,"MALP"," "..SGLanguage.GetMessage("stool_key_malp"),"","",StarGate.MALPSettings);
-	end
-	if (StarGate.CheckModule("ships")) then
-		spawnmenu.AddToolMenuOption(cat_name,keys_name,"Shuttle"," "..SGLanguage.GetMessage("stool_key_dest"),"","",StarGate.ShuttleSettings);
-		spawnmenu.AddToolMenuOption(cat_name,keys_name,"Teltak"," "..SGLanguage.GetMessage("stool_key_teltak"),"","",StarGate.TeltakSettings);
-	end
+	spawnmenu.AddToolMenuOption(cat_name,keys_name,"Daedalus"," "..SGLanguage.GetMessage("stool_key_daedalus"),"","",StarGate.DaedalusSettings);
+	spawnmenu.AddToolMenuOption(cat_name,keys_name,"Dart"," "..SGLanguage.GetMessage("stool_key_dart"),"","",StarGate.DartSettings);
+	spawnmenu.AddToolMenuOption(cat_name,keys_name,"GateGlider"," "..SGLanguage.GetMessage("stool_key_glider"),"","",StarGate.GateGliderSettings);
+	spawnmenu.AddToolMenuOption(cat_name,keys_name,"Death Glider"," "..SGLanguage.GetMessage("stool_key_dglider"),"","",StarGate.DeathGliderSettings);
+	spawnmenu.AddToolMenuOption(cat_name,keys_name,"F302"," "..SGLanguage.GetMessage("stool_key_f302"),"","",StarGate.F302Settings);
+	spawnmenu.AddToolMenuOption(cat_name,keys_name,"Jumper"," "..SGLanguage.GetMessage("stool_key_jumper"),"","",StarGate.JumperSettings);
+	spawnmenu.AddToolMenuOption(cat_name,keys_name,"MALP"," "..SGLanguage.GetMessage("stool_key_malp"),"","",StarGate.MALPSettings);
+	spawnmenu.AddToolMenuOption(cat_name,keys_name,"Shuttle"," "..SGLanguage.GetMessage("stool_key_dest"),"","",StarGate.ShuttleSettings);
+	spawnmenu.AddToolMenuOption(cat_name,keys_name,"Teltak"," "..SGLanguage.GetMessage("stool_key_teltak"),"","",StarGate.TeltakSettings);
 
 	-- Add our stargate tools to the tab
 	local toolgun = weapons.Get("gmod_tool");

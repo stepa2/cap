@@ -22,9 +22,6 @@ ENT.Base = "base_anim"
 ENT.DoNotDuplicate = true 
 
 if SERVER then
-
---################# HEADER #################
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("weapon")) then return end
 AddCSLuaFile();
 
 ENT.Untouchable = true;

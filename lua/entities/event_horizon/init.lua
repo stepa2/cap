@@ -16,8 +16,6 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
---################# HEADER #################
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("base")) then return end
 ENT.CDSIgnore = true; -- CDS Immunity
 function ENT:gcbt_breakactions() end; ENT.hasdamagecase = true; -- GCombat invulnarability!
 

@@ -1,4 +1,5 @@
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("extra")) then return end
+
+
 local base_size=100 -- the size of the ring tube
 
 -- stuff in here cannnot be teleported
@@ -366,7 +367,7 @@ function ENT:DoRings()
 	self:Anim(false);
 
 	local dir = 1;
-	-- Addtion by aVoN: Use "FindRange" everytime we are facing down and the angle is below 45° (pi/4)
+	-- Addtion by aVoN: Use "FindRange" everytime we are facing down and the angle is below 45Â° (pi/4)
 	if(self.Entity:GetUp():DotProduct(Vector(0,0,-1)) > 1/math.sqrt(2)) then
 		--self.SetRange = 1024;
 		dir = -1;

@@ -1,4 +1,3 @@
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("devices")) then return end
 
 AddCSLuaFile("shared.lua");
 AddCSLuaFile("cl_init.lua");

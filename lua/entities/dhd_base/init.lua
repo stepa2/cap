@@ -21,9 +21,6 @@
 	Copyright (C) 2011 Madman07
 ]]--
 
---################# HEADER #################
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("base")) then return end
-
 --################# Include
 AddCSLuaFile("cl_init.lua");
 AddCSLuaFile("shared.lua");

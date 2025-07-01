@@ -16,7 +16,6 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("weapon")) then return end
 if (SGLanguage!=nil and SGLanguage.GetMessage!=nil) then
 SWEP.Category = SGLanguage.GetMessage("weapon_cat");
 SWEP.PrintName = SGLanguage.GetMessage("weapon_hand_device");
@@ -60,8 +59,7 @@ function SWEP:Initialize()
 end
 
 if SERVER then
-
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("weapon")) then return end
+	
 AddCSLuaFile();
 
 SWEP.Sounds = {

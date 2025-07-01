@@ -3,7 +3,6 @@
 	Copyright (C) 2011 Madman07
 ]]--
 
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("base")) then return end
 if SERVER then
 	AddCSLuaFile();
 else

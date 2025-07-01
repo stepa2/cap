@@ -12,8 +12,6 @@ ENT.AdminSpawnable = false
 ENT.IsRamp = true
 
 if SERVER then
-
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("extra")) then return end
 AddCSLuaFile()
 
 ENT.CDSIgnore = true;

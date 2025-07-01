@@ -17,7 +17,6 @@
 */
 
 --################# Header
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("entweapon") or SGLanguage==nil or SGLanguage.GetMessage==nil) then return end
 include("weapons/gmod_tool/stargate_base_tool.lua");
 TOOL.Category="Weapons";
 TOOL.Name=SGLanguage.GetMessage("stool_staff");
@@ -135,7 +134,7 @@ function TOOL:PostEntitySpawn(p,e,shoot,explode,model,r,g,b,shaft,explosion,expl
 	end      /*
 	e.AddCannonVelocity = util.tobool(add_cannon_velocity);
 	e.ColorizeExplosion = util.tobool(explosion_colorize);*/
-	-- Little workaround for that special model - It is turned upside down by 180°, so we need to alter the shoot position and direction with "this"
+	-- Little workaround for that special model - It is turned upside down by 180Â°, so we need to alter the shoot position and direction with "this"
 	if(e:GetModel():find("combine_binocular01.mdl")) then
 		e.ShootDirection = -1;
 	end

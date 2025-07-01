@@ -13,9 +13,6 @@ end
 end
 
 if SERVER then
-
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("ship")) then return end
-
 AddCSLuaFile()
 
 ENT.Railgunsound = Sound("f302/f302_railgun.wav")

@@ -28,9 +28,6 @@ ENT.Instructions= ""
 list.Set("CAP.Entity", ENT.PrintName, ENT);
 
 if SERVER then
-
---########Header########--
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("ship")) then return end
 AddCSLuaFile()
 
 ENT.Model = Model("models/Madman07/wraith_dart/wraith_dart.mdl")

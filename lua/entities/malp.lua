@@ -9,8 +9,6 @@ list.Set("CAP.Entity", ENT.PrintName, ENT);
 if (StarGate!=nil and StarGate.LifeSupportAndWire!=nil) then StarGate.LifeSupportAndWire(ENT); end -- When you need to add LifeSupport and Wire capabilities, you NEED TO CALL this before anything else or it wont work!
 
 if SERVER then
-
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("base")) then return end
 AddCSLuaFile()
 
 ENT.Sounds = {

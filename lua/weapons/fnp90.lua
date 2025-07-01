@@ -1,5 +1,3 @@
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("weapon")) then return end
-
 local HitImpact = function(attacker, tr, dmginfo)
 
 	local hit = EffectData()

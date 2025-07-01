@@ -32,18 +32,8 @@ function StarGate.Init()
 	else
 		StarGate.HasResourceDistribution = false;
 	end
-	-- Wire?
-	if(WireAddon or file.Exists("weapons/gmod_tool/stools/wire_adv.lua","LUA")) then
-		StarGate.HasWire = true;
-		if (file.IsDir("expression2","DATA") and not file.IsDir("expression2/cap_shared","DATA")) then
-			file.CreateDir("expression2/cap_shared");
-		end
-		if (file.IsDir("starfall","DATA") and not file.IsDir("starfall/cap_shared","DATA")) then
-			file.CreateDir("starfall/cap_shared");
-		end
-	else
-		StarGate.HasWire = false;
-	end
+	
+
 	if (not file.IsDir("stargate","DATA")) then
 		file.CreateDir("stargate","DATA");
 	end

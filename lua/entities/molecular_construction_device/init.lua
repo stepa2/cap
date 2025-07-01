@@ -3,7 +3,6 @@
 	Copyright (C) 2010  Llapp, AlexALX
 */
 
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("devices")) then return end
 AddCSLuaFile("cl_init.lua");
 AddCSLuaFile("shared.lua");
 include("shared.lua");
@@ -109,10 +108,8 @@ function ENT:Initialize()
 	self.Speed = StarGate.CFG:Get("mcd","speed",100)/100;
 	self.CheckRights = StarGate.CFG:Get("mcd","check_rights",true);
 
-	if(self.HasWire) then
-		self:CreateWireInputs("Alternative Skin","Effect Color [VECTOR]","Class Name [STRING]","Create")
-		self:CreateWireOutputs("Active","Creation Class [STRING]","Percent Completed", "Conscruction Complete")
-	end
+	self:CreateWireInputs("Alternative Skin","Effect Color [VECTOR]","Class Name [STRING]","Create")
+	self:CreateWireOutputs("Active","Creation Class [STRING]","Percent Completed", "Conscruction Complete")
 end
 
 function ENT:TriggerInput(k,v)
@@ -227,9 +224,7 @@ function ENT:Think()
 			self.Ent:SetMaterial("Llapp/mcd_sheet.vmt"); --models/props_combine/portalball001_sheet    Llapp/mcd_sheet.vmt
 			util.PrecacheSound("tech/mcd_spawn.wav");
 		    self.Entity:EmitSound( "tech/mcd_spawn.wav", 100, 77 );
-			if(self.HasWire) then
-				self:SetWire("Active", 1)
-			end
+			self:SetWire("Active", 1)
 		else
 		    self.EntProgress = self.Entity:GetNetworkedInt("EntProgress");
 			self.Progress = self.Entity:GetNWInt("Progress");
@@ -323,9 +318,7 @@ function ENT:Think()
 			self.AdvanceTimer = self.AdvanceTimer + 1;
 			if(self.AdvanceTimer == 50 or percent == 100)then
 			    self.Entity:SetNWInt("Advance",percent);
-			    if(self.HasWire) then
-					self:SetWire("Percent Completed", percent)
-				end
+				self:SetWire("Percent Completed", percent)
 				self.AdvanceTimer = 0;
 			end
 		end
@@ -354,12 +347,11 @@ function ENT:Think()
 				self.Entity:SetNWBool("IdleSound",false);
 				self.Ent = nil;
 				self.Forw = true;
-				if(self.HasWire) then
-					self:SetWire("Conscruction Complete", 0)
-					self:SetWire("Percent Completed", 0)
-					self:SetWire("Active", 0)
-					self:SetWire("Creation Class","")
-				end
+				
+				self:SetWire("Conscruction Complete", 0)
+				self:SetWire("Percent Completed", 0)
+				self:SetWire("Active", 0)
+				self:SetWire("Creation Class","")
 			end
 		end);
 		local sequence = self.Entity:LookupSequence("idle");
@@ -378,9 +370,7 @@ function ENT:Think()
 		self.Undone = false;
 		--self.Forw = true;
 		self.AdvanceTimer = 0;
-		if(self.HasWire) then
-			self:SetWire("Conscruction Complete", 1)
-		end
+		self:SetWire("Conscruction Complete", 1)
 	end
 	self.Entity:NextThink(CurTime()+0.01);
 	return true;

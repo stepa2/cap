@@ -48,7 +48,6 @@ list.Set( "Wire_button_Models", "models/Zsdaniel/ori-ringpanel/panel.mdl", {Angl
 list.Set( "Wire_button_Models", "models/Madman07/ring_panel/ancient/panel.mdl", {Angle=Angle(270,0,0),Position=Vector(0,0,-10)} )
 
 -- Player models and NPCs
-if (StarGate.CheckModule("npc")) then
 local NPC =
 {
 	Name = SGLanguage.GetMessage("npc_wraith"),
@@ -119,7 +118,7 @@ player_manager.AddValidModel( "#pm_wraith", "models/pg_props/pg_charaktere/pg_wr
 player_manager.AddValidModel( "#pm_prior", "models/tiny/Playermodels/Prior_PM.mdl" )
 player_manager.AddValidModel( "#pm_goauld", "models/ViktorK/player/anubis.mdl" )
 player_manager.AddValidModel( "#pm_sg_soldier", "models/ViktorK/player/scout_tau.mdl" )
-end
+
 
 -- For prop tabs (spawnlists)
 StarGate.SpawnList = {};

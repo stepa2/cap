@@ -33,9 +33,6 @@ ENT.IsSGVehicleCustomView = true
 ENT.EntHealth = 20000;
 
 if SERVER then
-
---########Header########--
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("ship")) then return end
 AddCSLuaFile()
 
 ENT.Model = Model("models/James/teltac/teltac.mdl")

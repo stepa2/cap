@@ -28,9 +28,6 @@ ENT.Spawnable = false
 ENT.AdminSpawnable = false
 
 if SERVER then
-
---################# HEADER #################
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("energy")) then return end
 AddCSLuaFile();
 --################# SENT CODE ###############
 

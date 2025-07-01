@@ -27,9 +27,6 @@ ENT.Spawnable = false
 ENT.AdminSpawnable = false
 
 if SERVER then
-
---################# HEADER #################
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("entweapon")) then return end
 AddCSLuaFile();
 
 ENT.Sound = {Shot=Sound("weapons/drone_shot.mp3")};
@@ -147,17 +144,10 @@ end
 
 --#################  Updates the overlay text @aVoN
 function ENT:ShowOutput()
-	local add = "Off";
-	if(self.Launched) then
-		add = "On";
-		if(StarGate.HasWire) then
-			Wire_TriggerOutput(self.Entity,"Active",1);
-		end
-	else
-		if(StarGate.HasWire) then
-			Wire_TriggerOutput(self.Entity,"Active",0);
-		end
-	end
+	
+	Wire_TriggerOutput(self.Entity,"Active", self.Launched and 1 or 0);
+	local add = self.Launched and "On" or "Off"
+
 	self:SetWire("Active",util.tobool(self.Launched));
 	local track = "";
 	if(self.Track) then

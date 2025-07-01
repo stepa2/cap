@@ -31,9 +31,6 @@ list.Set("CAP.Entity", ENT.PrintName, ENT);
 ENT.EntHealth = 2000
 
 if SERVER then
-
---########Header########--
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("ship")) then return end
 AddCSLuaFile()
 
 ENT.Model = Model("models/Iziraider/shuttle/shuttle.mdl")

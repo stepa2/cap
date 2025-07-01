@@ -1,5 +1,5 @@
 /* Copyright (C) 2016 by glebqip */
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("extra")) then return end
+
 AddCSLuaFile("cl_init.lua")
 AddCSLuaFile("shared.lua")
 for _,filename in pairs(file.Find("entities/sgc_monitor/screens/*.lua","LUA")) do AddCSLuaFile("entities/sgc_monitor/screens/"..filename) end

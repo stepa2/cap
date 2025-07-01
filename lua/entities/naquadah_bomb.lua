@@ -16,8 +16,6 @@ ENT.chargeTime = 4
 ENT.yield = 100
 
 if SERVER then
-
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("entweapon")) then return end
 AddCSLuaFile()
 
 ENT.SoundPaths = {}
@@ -41,10 +39,8 @@ function ENT:Initialize()
 	self.Entity:SetSolid(SOLID_VPHYSICS)
 
    -- Set up wire inputs and outputs
-	if(self.HasWire) then
-		self:CreateWireInputs("Detonate", "Abort", "Detonation Code [STRING]", "Abort Code [STRING]", "Time to Destruct")
-		self:CreateWireOutputs("Charging", "Charge", "Countdown Timer")
-	end
+	self:CreateWireInputs("Detonate", "Abort", "Detonation Code [STRING]", "Abort Code [STRING]", "Time to Destruct")
+	self:CreateWireOutputs("Charging", "Charge", "Countdown Timer")
 
 	--self.Sounds["ambient"] = CreateSound(self.Entity, self.SoundPaths["charge_ambient"])
 end
@@ -59,11 +55,9 @@ function ENT:Setup(detonationCode, abortCode,  yield, chargeTime, hud, cart, p)
 	self.yield = math.Clamp(yield, 10, 100)
 	self.chargeTime = math.max(chargeTime, 10)
 
-	if(self.HasWire) then
-		self:SetWire("Charging", 0)
-		self:SetWire("Charge", 0)
-		self:SetWire("Countdown Timer", 0)
-	end
+	self:SetWire("Charging", 0)
+	self:SetWire("Charge", 0)
+	self:SetWire("Countdown Timer", 0)
 
 	self:SetNWBool("Hud", hud)
 	if cart and not IsValid(self.Cart) then
@@ -106,9 +100,7 @@ function ENT:StartDetonation(code)
 
       self:SetNWInt("State", 3)
 
-      if(self.HasWire) then
-         self:SetWire("Charging", 1)
-      end
+      self:SetWire("Charging", 1)
 
       self.Entity:EmitSound(self.SoundPaths["charge_start"])
       --self.Sounds["ambient"]:Play()
@@ -130,11 +122,9 @@ function ENT:AbortDetonation(code)
       self.charge = 0
 	  self.Entity:SetNetworkedInt("BombOverlayTime",0)
 
-      if(self.HasWire) then
-         self:SetWire("Charging", 0)
-         self:SetWire("Charge", self.charge)
-         self:SetWire("Countdown Timer", 0)
-      end
+      self:SetWire("Charging", 0)
+      self:SetWire("Charge", self.charge)
+      self:SetWire("Countdown Timer", 0)
 
       self.Entity:StopSound(self.SoundPaths["charge_start"])
       --self.Sounds["ambient"]:Stop()
@@ -299,10 +289,8 @@ function ENT:Charge()
 
    self.charge = self.charge + (100 / self.chargeTime)
 
-   if(self.HasWire) then
-		self:SetWire("Charge", self.charge)
-		self:SetWire("Countdown Timer", self.chargeTime * ((100-self.charge)/100)+1)
-   end
+	self:SetWire("Charge", self.charge)
+	self:SetWire("Countdown Timer", self.chargeTime * ((100-self.charge)/100)+1)
 
    self:ShakeCamera(16 * (self.charge / 100),
                     1,

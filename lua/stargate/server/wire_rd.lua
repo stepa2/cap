@@ -21,7 +21,6 @@
 StarGate.WireRD = {};
 function StarGate.LifeSupportAndWire(ENT)
 	ENT.WireDebugName = ENT.WireDebugName or "No Name";
-	ENT.HasWire = StarGate.HasWire;
 	ENT.HasResourceDistribution = StarGate.HasResourceDistribution;
 	ENT.HasRD = StarGate.HasResourceDistribution; -- Quick reference
 

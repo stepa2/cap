@@ -12,8 +12,6 @@ ENT.WireDebugName = "Stargate Iris Computer"
 list.Set("CAP.Entity", ENT.PrintName, ENT);
 
 if SERVER then
-
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("base")) then return end
 AddCSLuaFile()
 
 if (StarGate!=nil and StarGate.LifeSupportAndWire!=nil) then StarGate.LifeSupportAndWire(ENT); end

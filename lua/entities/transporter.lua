@@ -18,8 +18,6 @@ list.Set("CAP.Entity", ENT.PrintName, ENT);
 
 if SERVER then
 
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("devices")) then return end
-
 AddCSLuaFile();
 
 --include("entities/event_horizon/modules/teleport.lua"); -- FIXME: Move all teleportation code of the eventhorizon to /stargate/server/teleport.lua. Then create a teleportation class

@@ -17,7 +17,6 @@
 */
 
 --################# Header
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("entweapon") or SGLanguage==nil or SGLanguage.GetMessage==nil) then return end
 include("weapons/gmod_tool/stargate_base_tool.lua");
 
 TOOL.Category="Weapons";
@@ -126,7 +125,7 @@ function TOOL:ControlsPanel(Panel)
 	});
 	local auto_track = StarGate.CFG:Get("drone","auto_track");
 	local eye_track = StarGate.CFG:Get("drone","eye_track");
-	if((StarGate.HasWire or auto_track) and eye_track) then
+	if eye_track then
 		-- Allow both tracking
 		Panel:AddControl("Numpad",{
 			ButtonSize=22,
@@ -179,7 +178,7 @@ if SERVER then
 	);
 	numpad.Register("DroneTrackOn",
 		function(p,e)
-			if(not (StarGate.CFG:Get("drone","auto_track") or StarGate.HasWire)) then return end;
+			if(not StarGate.CFG:Get("drone","auto_track")) then return end;
 			if(not e:IsValid()) then return end;
 			e.HasTrackedBefore = e.Track;
 			e.Track = true;
@@ -188,7 +187,7 @@ if SERVER then
 	);
 	numpad.Register("DroneTrackOff",
 		function(p,e)
-			if(not (StarGate.CFG:Get("drone","auto_track") or StarGate.HasWire)) then return end;
+			if(not StarGate.CFG:Get("drone","auto_track")) then return end;
 			if(not e:IsValid()) then return end;
 			if(not e.HasTrackedBefore) then
 				e.Track = false;

@@ -16,8 +16,6 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
---################# HEADER #################
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("base")) then return end
 AddCSLuaFile("cl_init.lua");
 AddCSLuaFile("shared.lua");
 include("shared.lua");
@@ -84,7 +82,6 @@ function ENT:RegisterModules()
 	local f = function() end; -- Dummy, so the default tables are set and this script does not fail
 	local default = {Open=f,Close=f,Hit=f,Remove=f,Init=f};
 	for _,v in pairs(file.Find("entities/stargate_iris/modules/*.lua","LUA")) do
-		if (v=="iris_infinity.lua" and not StarGate.CheckModule("extra")) then continue end
 		ANIM = table.Copy(default);
 		setmetatable(ANIM,{__index=self,__newindex=self});  -- ATTENTION: In your ANIM table, do not use a function which already exists in the Entity, or you will overwrite it! - This is for purpose!
 		include("entities/stargate_iris/modules/"..v);

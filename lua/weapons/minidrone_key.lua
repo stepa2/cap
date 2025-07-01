@@ -35,7 +35,6 @@ function SWEP:Reload() return end
 
 if SERVER then
 
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("entweapon")) then return end
 AddCSLuaFile();
 
 function SWEP:Initialize()

@@ -91,10 +91,6 @@ end);
 end
 
 if SERVER then
-
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("base")) then return end
-
---################# HEADER #################
 AddCSLuaFile();
 
 ENT.Sounds = {Hit=Sound("shields/shield_hit.mp3")};

@@ -27,9 +27,6 @@ ENT.AdminSpawnable = false
 ENT.DoNotDuplicate = true
 
 if SERVER then
-
---################# HEADER #################
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("extra")) then return end
 AddCSLuaFile();
 
 ENT.Untouchable = true;

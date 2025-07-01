@@ -11,8 +11,6 @@ ENT.IsRings = true;
 ENT.AutomaticFrameAdvance = true
 
 if SERVER then
-
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("extra")) then return end
 AddCSLuaFile();
 
 ENT.RingModel = "models/Madman07/ancient_rings/ring.mdl";

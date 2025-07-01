@@ -14,8 +14,6 @@ ENT.WireDebugName = "Drone Launcher"
 list.Set("CAP.Entity", ENT.PrintName, ENT);
 
 if SERVER then
-
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("entweapon")) then return end
 AddCSLuaFile();
 ENT.Sound = {Shot=Sound("weapons/drone_shot.mp3")};
 

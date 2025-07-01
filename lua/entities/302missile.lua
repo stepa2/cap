@@ -18,8 +18,6 @@
 
 --################# HEADER #################
 if SERVER then
-
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("ship")) then return end
 AddCSLuaFile();
 ENT.IgnoreTouch = true;
 ENT.DoNotDuplicate = true;

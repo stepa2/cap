@@ -3,7 +3,6 @@
 	Copyright (C) 2010 Madman07
 */
 --################### Head
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("extra")) then return end
 if (SGLanguage!=nil and SGLanguage.GetMessage!=nil) then
 SWEP.PrintName = SGLanguage.GetMessage("weapon_misc_lsd");
 SWEP.Category = SGLanguage.GetMessage("weapon_misc_cat");
@@ -89,8 +88,6 @@ if SERVER then
 end
 
 if CLIENT then
-
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("extra")) then return end
 
 -- Inventory Icon
 if(file.Exists("materials/VGUI/weapons/LSD_inventory.vmt","GAME")) then

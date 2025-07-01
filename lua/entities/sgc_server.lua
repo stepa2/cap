@@ -44,8 +44,6 @@ properties.Add( "SGCScreen.CodeMenu",
 });
 
 if SERVER then
-
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("extra")) then return end
 AddCSLuaFile();
 
 ENT.ServerVer = 1

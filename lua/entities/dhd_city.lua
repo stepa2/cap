@@ -4,8 +4,7 @@
 ]]--
 
 --################# Include
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("base")) then return end
-if (StarGate!=nil and StarGate.LifeSupportAndWire!=nil) then StarGate.LifeSupportAndWire(ENT); end
+if StarGate.LifeSupportAndWire!=nil then StarGate.LifeSupportAndWire(ENT); end
 
 ENT.Type = "anim"
 ENT.Base = "dhd_base"
@@ -25,7 +24,7 @@ ENT.Color = {
 	chevron="200 1 1"
 };
 
--- The directionvectors, relativly from the EntPos to to the chevrons pos - The numbers and chars behind it will aquire a human readable adress like 1B3D5F-Chevron7 - Chevron7 will always be "Â", because the gmod10 servers are on earth :D
+-- The directionvectors, relativly from the EntPos to to the chevrons pos - The numbers and chars behind it will aquire a human readable adress like 1B3D5F-Chevron7 - Chevron7 will always be "ï¿½", because the gmod10 servers are on earth :D
 ENT.ChevronPositionsGroup2 = {
 	["*"] = Vector(-9.13, 20.55, 37.84),    -- Both changed for galaxy and universe, using crystal for it
 	["@"] = Vector(-4.07, 20.52, 37.85),    -- # is included with DIAL

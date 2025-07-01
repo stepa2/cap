@@ -28,10 +28,6 @@ ENT.AdminSpawnable = false
 ENT.RenderGroup = RENDERGROUP_OPAQUE; -- This FUCKING THING avoids the clipping bug I have had for ages since stargate BETA 1.0. DAMN!
 
 if SERVER then
-
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("base")) then return end
-
---################# HEADER #################
 AddCSLuaFile();
 
 ENT.Sounds={

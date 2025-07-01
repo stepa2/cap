@@ -82,9 +82,6 @@ end
 end
 
 if SERVER then
-
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("entweapon")) then return end
-
 AddCSLuaFile()
 
 -- Sound when firing begins
@@ -189,10 +186,9 @@ function ENT:Initialize()
 	end
 
 	 -- Set up wire inputs and outputs
-	if(self.HasWire) then
-		self:CreateWireInputs("Fire")
-		self:CreateWireOutputs("Active")
-	end
+	self:CreateWireInputs("Fire")
+	self:CreateWireOutputs("Active")
+	
 
 	-- The time when the USE key was last pressed on this entity
 	self.lastUseTime = 0;
@@ -641,15 +637,7 @@ end
 
 -- Updates all wire output values
 function ENT:UpdateWireOutputs()
-   if(!self.HasWire) then
-      return
-   end
-
-   if(self.isFiring) then
-      self:SetWire("Active", 1)
-   else
-      self:SetWire("Active", 0)
-   end
+    self:SetWire("Active", self.isFiring and 1 or 0)
 end
 
 function ENT:OnRemove()

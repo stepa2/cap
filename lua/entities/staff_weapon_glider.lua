@@ -29,9 +29,6 @@ ENT.Spawnable = false
 ENT.AdminSpawnable = false
 
 if SERVER then
-
---################### Head
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("ship")) then return end
 AddCSLuaFile()
 
 --################### Init @aVoN
@@ -48,7 +45,7 @@ function ENT:Initialize()
 	self.Delay = StarGate.CFG:Get("staff_stationary","delay",0.3);
 	self.DirectionVector = Vector(0,0,0);
 	self.TargetVector = Vector(0,0,0);
-	self.DirectionVectorAngleOffset = 0.5 -- Equals 60°
+	self.DirectionVectorAngleOffset = 0.5 -- Equals 60Â°
 	self:AddResource("energy",100);
 	self:CreateWireInputs("Fire","Distance","Explode","Dir_X","Dir_Y","Dir_Z","X","Y","Z","Disable Use");
 	self:CreateWireOutputs("Can Fire","Shots Remaining");

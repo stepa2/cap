@@ -28,8 +28,6 @@ ENT.AdminSpawnable = false
 
 if SERVER then
 
---################# HEADER #################
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("ship")) then return end
 AddCSLuaFile();
 
 ENT.DoNotDuplicate = true;

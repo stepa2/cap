@@ -2,10 +2,7 @@
 	Atanik Armband
 	Copyright (C) 2012 Llapp
 ]]--
-if SERVER then
-	if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("weapon")) then return end
-	AddCSLuaFile();
-end
+if SERVER then AddCSLuaFile() end
 
 if (SGLanguage!=nil and SGLanguage.GetMessage!=nil) then
 SWEP.PrintName = SGLanguage.GetMessage("weapon_misc_atanik");

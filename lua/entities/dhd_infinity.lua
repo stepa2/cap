@@ -18,9 +18,6 @@ ENT.Color = {
 ENT.IsDHDSg1 = true
 
 if SERVER then
-
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("extra")) then return end
---################# HEADER #################
 AddCSLuaFile();
 
 ENT.PlorkSound = "stargate/dhd_sg1.mp3"; -- The old sound

@@ -37,10 +37,6 @@ function ENT:GetBeamNormal()
 end
 
 if SERVER then
-
---################# Header
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("ship")) then return end
--- Includes
 AddCSLuaFile();
 -- Defines
 ENT.Sounds = {

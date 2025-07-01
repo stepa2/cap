@@ -26,9 +26,6 @@ ENT.AdminSpawnable		= false
 ENT.DoNotDuplicate = true 
 
 if SERVER then
-
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("entweapon")) then return end
-
 AddCSLuaFile()
 
 function ENT:Setup(pos, scale) -- THIS MUST BE CALLED BEFORE IT'S SPAWNED

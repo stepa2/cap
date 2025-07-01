@@ -4,8 +4,6 @@
 	Secret Code added by AlexALX
 ]]--
 
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("devices")) then return end
-
 AddCSLuaFile("cl_init.lua")
 AddCSLuaFile("shared.lua")
 include("shared.lua")

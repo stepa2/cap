@@ -18,8 +18,6 @@ ENT.AdminSpawnable = false
 ENT.CapJammingDevice = true
 
 if SERVER then
-
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("extra")) then return end
 AddCSLuaFile()
 
 -----------------------------------INIT----------------------------------

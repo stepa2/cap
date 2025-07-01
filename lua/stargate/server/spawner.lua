@@ -83,27 +83,11 @@ function StarGate.GateSpawner.LoadConfig()
 	return false;
 end
 
-/* This code is for workshop, it is disabled.
-local types = {
-	base = {"stargate_sg1","stargate_atlantis","stargate_universe","dhd_sg1","dhd_atlantis","dhd_universe","dhd_city"},
-}
-local function GateSpawner_CheckModule(class,model)
-	if (model and model!="" and not file.Exists("models/"..model,"GAME")) then return false end
-	for k,v in pairs(types) do
-		if (not StarGate.CheckModule(k)) then continue end
-		for k2,v2 in pairs(v) do
-			if (class:find(v2)) then return true end
-		end
-	end
-	return false;
-end  */
-
 -- ############### Spawning function @aVoN
 function StarGate.GateSpawner.Spawn(v,protect,k,k2)
 	if (StarGate.GateSpawner.Block) then return nil end
 	if(v.position and v.classname) then
 		if (StarGate_Group and StarGate_Group.Error == true or StarGate_Group==nil or StarGate_Group.Error==nil) then return end
-		--if (not GateSpawner_CheckModule(v.classname,v.model)) then return end
 		if (StarGate.CFG and StarGate.CFG:Get("cap_disabled_ent",v.classname,false)) then return end
 		if (v.classname=="prop_physics" and StarGate.CFG and not StarGate.CFG:Get("gatespawner","sv_spawn_props",true)) then return end
 		local IsIris = v.classname:find("iris");

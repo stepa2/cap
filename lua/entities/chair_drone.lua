@@ -34,9 +34,6 @@ end
 if SERVER then
 
 if (1==1) then return end -- this ent is disabled, because it isn't used anywhere
-
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("ship")) then return end
-
 AddCSLuaFile()
 
 function ENT:SpawnFunction(pl, tr)

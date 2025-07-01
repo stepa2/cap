@@ -47,9 +47,6 @@ end
 end
 
 if SERVER then
-
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("devices")) then return end
-
 AddCSLuaFile();
 
 function ENT:Initialize()

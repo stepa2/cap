@@ -3,7 +3,6 @@
 	Copyright (C) 2011 Llapp
 ]]--
 
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("extra")) then return end
 if (SGLanguage!=nil and SGLanguage.GetMessage!=nil) then
 SWEP.PrintName = SGLanguage.GetMessage("weapon_misc_virus");
 SWEP.Category = SGLanguage.GetMessage("weapon_misc_cat");
@@ -50,7 +49,6 @@ SWEP.WElements = {
 
 if SERVER then
 
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("extra")) then return end
 AddCSLuaFile();
 
 SWEP.Delay = 5;
@@ -120,7 +118,6 @@ end
 
 if CLIENT then
 
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("extra")) then return end
 
 -- Inventory Icon
 if(file.Exists("materials/VGUI/weapons/virus.vmt","GAME")) then

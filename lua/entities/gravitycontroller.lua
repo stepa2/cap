@@ -11,9 +11,6 @@ ENT.AdminSpawnable = false
 ENT.WireDebugName = "GravityController"
 
 if SERVER then
-
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("extra")) then return end
-
 AddCSLuaFile();
 
 function ENT:Initialize()

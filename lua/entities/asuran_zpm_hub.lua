@@ -23,9 +23,6 @@ end
 ENT.ZPMHub = true
 
 if SERVER then
-
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("energy")) then return end
-
 AddCSLuaFile();
 
 ENT.Sounds = {

@@ -1,4 +1,3 @@
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("weapons")) then return end
 if (SGLanguage!=nil and SGLanguage.GetMessage!=nil) then
 	SWEP.PrintName = SGLanguage.GetMessage("weapon_tac");
 	SWEP.Category = SGLanguage.GetMessage("weapon_cat");

@@ -18,7 +18,7 @@ ENT.Color = {
 	chevron="200 65 0"
 };
 
--- The directionvectors, relativly from the EntPos to to the chevrons pos - The numbers and chars behind it will aquire a human readable adress like 1B3D5F-Chevron7 - Chevron7 will always be "Â", because the gmod10 servers are on earth :D
+-- The directionvectors, relativly from the EntPos to to the chevrons pos - The numbers and chars behind it will aquire a human readable adress like 1B3D5F-Chevron7 - Chevron7 will always be "B", because the gmod10 servers are on earth :D
 ENT.ChevronPositionsGroup = {
 	--
 	[0] = Vector(48.5569, -30.4505, 56.1191),
@@ -116,11 +116,6 @@ ENT.ChevronPositionsGalaxy = {
 }
 
 if SERVER then
-
---################# HEADER #################
-if (StarGate==nil or StarGate.CheckModule==nil or not StarGate.CheckModule("extra")) then return end
-
---################# Include
 AddCSLuaFile();
 
 --################# SENT CODE #################
