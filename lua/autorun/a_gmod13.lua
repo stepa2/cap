@@ -7,65 +7,6 @@ if (SERVER) then
 	AddCSLuaFile();
 end
 
--- needed for detect when this lib loaded or not in other files.
-function Gmod13Lib()
-	return true;
-end
-
--- Fix for file.* functions, needed for wiremod, finding cap e2 chips on workshop.
-local file_Open = file.Open
-local file_Find = file.Find
-
--- need keep old way for compatibility with other mods (including wiremod)
-function file.Open(path,mode,param)
-	local dir = "GAME";
-	if (not param) then
-		dir = "DATA"
-	elseif (param==true) then
-		dir = "GAME";
-	else
-		dir = param
-	end
-	if (dir:upper()=="DATA" and not file.Exists(path,dir) and (mode=="r" or mode=="rb")) then
-		-- special workaround for workshop and e2/starfall
-		if path and (path:lower():find("^expression2/cap_shared/(.*).lua$")
-		or path:lower():find("^starfall/cap_shared/(.*).lua$")) then
-			return file_Open("lua/data/"..path,mode,"GAME");
-		end
-	end
-	return file_Open(path,mode,dir);
-end
-
-function file.Find(path,dir,order)
-	if (path==nil or dir==nil) then return {},{} end
-	if (dir:upper()=="DATA") then
-		local files,folders = file_Find(path,dir,order);
-		-- ugly workaround for workshop...
-		if path and (path:lower():find("^expression2/cap_shared/(.*)$")
-		or path:lower():find("^starfall/cap_shared/(.*)$")) then
-			local fi,fo = file_Find("lua/data/"..path,"GAME");
-            if (fi) then
-	 			for k,d in pairs(fi) do
-					if (not table.HasValue(files,d)) then
-						table.insert(files,d);
-					end
-				end
-            end
-            if (fo) then
-	 			for k,d in pairs(fo) do
-					if (not table.HasValue(folders,d)) then
-						table.insert(folders,d);
-					end
-				end
-            end
-		end
-		-- i know, order will not work correct in this case, later will fix probably
-		return files,folders;
-	else
-		return file_Find(path,dir,order);
-	end
-end
-
 function Vertex( pos, u, v, normal )
 	return { pos = pos, u = u, v = v, normal = normal };
 end

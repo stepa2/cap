@@ -61,7 +61,6 @@ local function ValidToExecute(fl,state)
 	return false; */
 	return true;
 end
-if (Gmod13Lib==nil) then include("a_gmod13.lua") end
 
 for _,v in pairs(engine.GetAddons()) do
 	if (v.mounted and tonumber(v.wsid)==175394472) then

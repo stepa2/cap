@@ -34,10 +34,6 @@ if (CLIENT) then
 	CreateClientConVar( "sg_language", GetConVarString("gmod_language") or "en", true, false )
 end
 
-if (Gmod13Lib==nil) then
-	include("a_gmod13.lua")
-end
-
 LANGParser = {};
 -- ############## Loads an ini file (object) @ aVoN
 function LANGParser:new(file_,no_autotrim)
