@@ -59,31 +59,6 @@ function ENT:DialMenu()
 	net.Send(self.Owner);
 end
 
-       /*
---This is from aVoN's wire_rd detection but
---################# What version is installed? @aVoN
-local RD; -- QuickIndex
-local IsThree;
-local function RDThree()
-	if(IsThree ~= nil) then return IsThree end;
-	if(CAF and CAF.GetAddon("Resource Distribution")) then
-		IsThree = true;
-		RD = CAF.GetAddon("Resource Distribution");
-		return true;
-	end
-	IsThree = false;
-	return false;
-end
-
-function ENT:Power()
-
-	if(RDThree()) then
-		RD.Link(self.Entity,self.Gates)
-	else
-		Dev_Link(self.Entity,self.Gates)
-	end
-end*/
-
 if (StarGate and StarGate.CAP_GmodDuplicator) then
 	duplicator.RegisterEntityClass( "goauld_dhd_prop", StarGate.CAP_GmodDuplicator, "Data" )
 end

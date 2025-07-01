@@ -124,14 +124,7 @@ end
 local RD; -- QuickIndex
 local IsThree;
 function StarGate.RDThree()
-	if(IsThree ~= nil) then return IsThree end;
-	if(CAF and CAF.GetAddon("Resource Distribution")) then
-		IsThree = true;
-		RD = CAF.GetAddon("Resource Distribution");
-		return true;
-	end
-	IsThree = false;
-	return false;
+	return CAF ~= nil;
 end
 
 local IsEnv;

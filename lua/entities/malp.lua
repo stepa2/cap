@@ -71,14 +71,10 @@ function ENT:Initialize()
 	self:CreateWireInputs("Forward","Left","Right","Back");
 	self:CreateWireOutputs("Gravity","Habitat","Atmosphere","Temperature","O2 Percent","CO2 Percent","N2 Percent","H2 Percent","Water Level");
 	
-	if (CAF and CAF.GetAddon and CAF.GetAddon("Spacebuild") and table.Count(CAF.GetAddon("Spacebuild"):GetEnvironments())!=0) then
-		self.CAF = true;
-	end
-	
 	timer.Create("MALPWire_"..self:EntIndex(),0.25,0,function() if IsValid(self) then
 		if (not self.damaged) then
-			if (self.CAF) then
-				local Env = CAF.GetAddon("Spacebuild").FindEnvironmentOnPos(self:GetPos())
+			if CAF then
+				local Env = CAF.LibSB.FindEnvironmentOnPos(self:GetPos())
 		
 				if (Env.sbenvironment) then
 					self.environment.gravity = Env.sbenvironment.gravity or 0;

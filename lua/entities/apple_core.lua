@@ -36,20 +36,15 @@ function ENT:Initialize()
 	self.Entity:SetSolid(SOLID_VPHYSICS);
 	self.Entity:SetUseType(SIMPLE_USE);
 
-	self.HaveRD3 = false;
-	if (CAF and CAF.GetAddon("Resource Distribution")) then self.HaveRD3 = true end --RD3 needed!
-
-	if self.HaveRD3 then -- Life Support
+	if CAF ~= nil then -- Life Support
 		if (WireAddon) then
 			self.Outputs = WireLib.CreateOutputs( self.Entity, {"Water","Steam","Energy","ZPH","Oxygen"});
 		end
 
-		self.netid = CAF.GetAddon("Resource Distribution").CreateNetwork(self);
+		self.netid = CAF.LibRD.CreateNetwork(self);
 		self:SetNetworkedInt( "netid", self.netid );
 		self.range = 2048;
 		self:SetNetworkedInt( "range", self.range );
-
-		self.RDEnt = CAF.GetAddon("Resource Distribution");
 	end
 
 end
@@ -106,8 +101,8 @@ end
 -----------------------------------RESOURCE DISTRIBUTION----------------------------------
 
 function ENT:Think()
-	if self.HaveRD3 and self.RDEnt.GetNetTable then
-		local nettable = self.RDEnt.GetNetTable(self.netid);
+	if CAF then
+		local nettable = CAF.LibRD.GetNetTable(self.netid);
 		if nettable.resources then
 			if nettable.resources.water then
 				Wire_TriggerOutput(self.Entity, "Water", nettable.resources.water.value)
@@ -126,7 +121,7 @@ function ENT:Think()
 			end
 		end
 
-	local nettable = CAF.GetAddon("Resource Distribution").GetNetTable(self.netid)
+	local nettable = CAF.LibRD.GetNetTable(self.netid)
 	if table.Count(nettable) > 0 then
 		local entities = nettable.entities
 		if table.Count(entities) > 0 then
@@ -134,7 +129,7 @@ function ENT:Think()
 				if ent and IsValid(ent) then
 					local pos = ent:GetPos()
 					if pos:Distance(self:GetPos()) > self.range then
-						CAF.GetAddon("Resource Distribution").Unlink(ent)
+						CAF.LibRD.Unlink(ent)
 						self:EmitSound("physics/metal/metal_computer_impact_bullet"..math.random(1,3)..".wav", 500)
 						ent:EmitSound("physics/metal/metal_computer_impact_bullet"..math.random(1,3)..".wav", 500)
 					end
@@ -144,14 +139,14 @@ function ENT:Think()
 		local cons = nettable.cons
 		if table.Count(cons) > 0 then
 			for k, v in pairs(cons) do
-				local tab = CAF.GetAddon("Resource Distribution").GetNetTable(v)
+				local tab = CAF.LibRD.GetNetTable(v)
 				if tab and table.Count(tab) > 0 then
 					local ent = tab.nodeent
 					if ent and IsValid(ent) then
 						local pos = ent:GetPos()
 						local range = pos:Distance(self:GetPos())
 						if range > self.range and range > ent.range then
-							CAF.GetAddon("Resource Distribution").UnlinkNodes(self.netid, ent.netid)
+							CAF.LibRD.UnlinkNodes(self.netid, ent.netid)
 							self:EmitSound("physics/metal/metal_computer_impact_bullet"..math.random(1,3)..".wav", 500)
 							ent:EmitSound("physics/metal/metal_computer_impact_bullet"..math.random(1,3)..".wav", 500)
 						end
@@ -175,9 +170,9 @@ function ENT:OnRemove()
 		self.Light = nil;
 	end
 
-	if self.HaveRD3 and CAF then
-		CAF.GetAddon("Resource Distribution").UnlinkAllFromNode(self.netid)
-		CAF.GetAddon("Resource Distribution").RemoveRDEntity(self)
+	if CAF then
+		CAF.LibRD.UnlinkAllFromNode(self.netid)
+		CAF.LibRD.RemoveRDEntity(self)
 		if not (WireAddon == nil) then Wire_Remove(self.Entity) end
 	end
 
@@ -205,29 +200,6 @@ end
 function ENT:OnRestore()
 	if not (WireAddon == nil) then Wire_Restored(self.Entity) end
 end
-/* why only rd3? its calling from wire_rd
-function ENT:PreEntityCopy()
-	if self.HaveRD3 then
-		local RD = CAF.GetAddon("Resource Distribution")
-		RD.BuildDupeInfo(self.Entity)
-		if not (WireAddon == nil) then
-			local DupeInfo = WireLib.BuildDupeInfo(self.Entity)
-			if DupeInfo then
-				duplicator.StoreEntityModifier( self.Entity, "WireDupeInfo", DupeInfo )
-			end
-		end
-	end
-end
-
-function ENT:PostEntityPaste( Player, Ent, CreatedEntities )
-	if self.HaveRD3 then
-		local RD = CAF.GetAddon("Resource Distribution")
-		RD.ApplyDupeInfo(Ent, CreatedEntities)
-		if not (WireAddon == nil) and (Ent.EntityMods) and (Ent.EntityMods.WireDupeInfo) then
-			WireLib.ApplyDupeInfo(Player, Ent, Ent.EntityMods.WireDupeInfo, function(id) return CreatedEntities[id] end)
-		end
-	end
-end*/
 
 function ENT:PreEntityCopy()
 	local dupeInfo = {}
@@ -252,11 +224,7 @@ function ENT:PreEntityCopy()
 	dupeInfo.ScreenTextF = self.Console.ScreenTextF;
 	dupeInfo.ScreenTextG = self.Console.ScreenTextG;
 	dupeInfo.ScreenTextH = self.Console.ScreenTextH;
-
-	if self.HaveRD3 then
-		local RD = CAF.GetAddon("Resource Distribution")
-		RD.BuildDupeInfo(self.Entity)
-	end */
+	*/
 
 	duplicator.StoreEntityModifier(self, "APDupeInfo", dupeInfo)
 	StarGate.WireRD.PreEntityCopy(self)
@@ -293,11 +261,6 @@ function ENT:PostEntityPaste(ply, Ent, CreatedEntities)
     /*
 	if(Ent.EntityMods and Ent.EntityMods.APDupeInfo.WireData) then
 		WireLib.ApplyDupeInfo( ply, Ent, Ent.EntityMods.APDupeInfo.WireData, function(id) return CreatedEntities[id] end)
-	end
-
-	if self.HaveRD3 then
-		local RD = CAF.GetAddon("Resource Distribution")
-		RD.ApplyDupeInfo(Ent, CreatedEntities)
 	end
 
 	self.Console:SetNetworkedString("NameA",dupeInfo.ScreenTextA);

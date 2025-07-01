@@ -51,16 +51,11 @@ function ENT:Initialize()
 
 	self.CanEject = true;
 
-	self.HaveRD3 = false;
-	if (CAF and CAF.GetAddon("Resource Distribution")) then self.HaveRD3 = true end
-
-	if self.HaveRD3 then -- Make us a node!
-		self.netid = CAF.GetAddon("Resource Distribution").CreateNetwork(self);
+	if CAF then -- Make us a node!
+		self.netid = CAF.LibRD.CreateNetwork(self);
 		self:SetNetworkedInt( "netid", self.netid );
 		self.range = 2048;
 		self:SetNetworkedInt( "range", self.range );
-
-		self.RDEnt = CAF.GetAddon("Resource Distribution");
 	elseif ( RES_DISTRIB == 2 ) then
 		self:AddResource("energy",1)
 	end
@@ -169,8 +164,8 @@ function ENT:Skins()
 end
 
 function ENT:Think()
-	if self.HaveRD3 then
-		local nettable = CAF.GetAddon("Resource Distribution").GetNetTable(self.netid)
+	if CAF then
+		local nettable = CAF.LibRD.GetNetTable(self.netid)
 		if table.Count(nettable) > 0 then
 			local entities = nettable.entities
 			if table.Count(entities) > 0 then
@@ -188,14 +183,14 @@ function ENT:Think()
 			local cons = nettable.cons
 			if table.Count(cons) > 0 then
 				for k, v in pairs(cons) do
-					local tab = CAF.GetAddon("Resource Distribution").GetNetTable(v)
+					local tab = CAF.LibRD.GetNetTable(v)
 					if tab and table.Count(tab) > 0 then
 						local ent = tab.nodeent
 						if ent and IsValid(ent) then
 							local pos = ent:GetPos()
 							local range = pos:Distance(self:GetPos())
 							if range > self.range and range > ent.range then
-								CAF.GetAddon("Resource Distribution").UnlinkNodes(self.netid, ent.netid)
+								CAF.LibRD.UnlinkNodes(self.netid, ent.netid)
 								self:EmitSound("physics/metal/metal_computer_impact_bullet"..math.random(1,3)..".wav", 500)
 								ent:EmitSound("physics/metal/metal_computer_impact_bullet"..math.random(1,3)..".wav", 500)
 							end
@@ -372,8 +367,8 @@ function ENT:SoundIdle(idle)
 end
 
 function ENT:HubLink(ent)
-	if self.HaveRD3 then
-		CAF.GetAddon("Resource Distribution").Link(ent,self.netid);
+	if CAF then
+		CAF.LibRD.Link(ent,self.netid);
 	elseif Environments then
 		ent:Link(self.node);
 		if (self.node) then
@@ -384,8 +379,8 @@ function ENT:HubLink(ent)
 	end
 end
 function ENT:HubUnlink(ent)
-	if self.HaveRD3 and CAF then
-		CAF.GetAddon("Resource Distribution").Unlink(ent);
+	if CAF then
+		CAF.LibRD.Unlink(ent);
 	elseif Environments then
 		ent:Unlink();
 	elseif ( RES_DISTRIB == 2 and Dev_Unlink_All) then

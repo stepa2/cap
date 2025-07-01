@@ -231,10 +231,9 @@ function TOOL:AutoLink(e1,e2)
 				-- Create an invisible link
 				Dev_Link(e1,e2,e1:GetPos(),e2:GetPos(),"cable/cable2",Color(0,0,0,0),0);
 			end
-		elseif (CAF and CAF.GetAddon("Resource Distribution")) then
-			local RD = CAF.GetAddon("Resource Distribution");
-			if (RD and e2.IsNode) then
-				RD.Link(e1,e2.netid);
+		elseif CAF then
+			if e2.IsNode then
+				CAF.LibRD.Link(e1,e2.netid);
 			end
 		elseif (Environments) then
 			if (e2.IsNode) then
@@ -259,7 +258,7 @@ function TOOL:SetPositionAndAngles(e,trace)
 		ang = ang+self.Models[mdl].Angle;
 	end
 	-- Now, rotate the prop around the surface normal (but only do this, if we hit some "ground" (not a on a wall - this looks strange and sometimes sucks!)
-	if(math.abs(trace.HitNormal:Dot(Vector(0,0,1))) >= 1/math.sqrt(2)) then -- angle is smaller than 45° degree
+	if(math.abs(trace.HitNormal:Dot(Vector(0,0,1))) >= 1/math.sqrt(2)) then -- angle is smaller than 45ï¿½ degree
 		ang:RotateAroundAxis(trace.HitNormal,self:GetOwner():GetAimVector():Angle().y + 180);
 	end
 	e:SetAngles(ang);
