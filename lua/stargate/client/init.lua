@@ -37,6 +37,24 @@ StarGate.HTTP = {
 StarGate.LATEST_VERSION = 0;
 StarGate.CURRENT_VERSION = 0;
 
+
+
+-- some old fonts used in cap entities
+surface.CreateFont( "SandboxLabel", {
+	font = "coolvetica",
+	size = 64,
+	weight = 500,
+	antialias = true,
+	additive = false,
+})
+surface.CreateFont("ScoreboardText", {
+	font = "Tahoma",
+	size = 16,
+	weight = 1000,
+	antialias = true,
+	additive = false,
+})
+
 --################# CODE ###################
 
 --#########################################

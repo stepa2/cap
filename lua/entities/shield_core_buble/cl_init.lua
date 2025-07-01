@@ -83,7 +83,6 @@ function ENT:SetCollisionScale()
 	local model = self:GetNWInt("PhysicModel", 1);
 	local size = self:GetNWVector("PhysicScale", Vector(1,1,1));
 
-	local vect, vec;
 	local convex = {}
 	local i = 0;
 	local ShieldModel;
@@ -93,13 +92,12 @@ function ENT:SetCollisionScale()
 	elseif (model == 3) then ShieldModel = AtlantisModel; end
 
 	for _, vertex in pairs(ShieldModel) do
-		vec = Vector(vertex.x*size.x,vertex.y*size.y,vertex.z*size.z);
-		vect = Vertex(vec, 1, 1, Vector( 0, 0, 1 ) )
-		table.insert(convex, vect);
+		local vec = Vector(vertex.x*size.x,vertex.y*size.y,vertex.z*size.z);
+		table.insert(convex, {pos = vec});
 		table.insert(self.RayModel, vec);
 	end
 
-	if (table.getn(convex) == 0) then return end //safefail
+	if #convex == 0 then return end //safefail
 
 	self.Entity:PhysicsFromMesh(convex);
 

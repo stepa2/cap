@@ -54,7 +54,7 @@ function ENT:CreateCollision(Gen1, Gen2)
 
 	for _, vertex in pairs(TokraBoxModel) do
 		local vec = Vector(vertex.x*length,vertex.y,vertex.z);
-		table.insert(convex, Vertex(vec, 1, 1, Vector( 0, 0, 1 )));
+		table.insert(convex, {pos = vec});
 	end
 	if (table.getn(convex) == 0) then return end //safefail
 

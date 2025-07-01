@@ -76,13 +76,13 @@ function StarGate.Load()
 		include("stargate/shared/capcheck.lua");
 	end
 
-	for _,state in pairs({"shared","server","client","vgui"}) do
+	for _,state in ipairs({"shared","server","client","vgui"}) do
 		-- Init always comes at first!
 		if(ValidToInclude(state) and #file.Find("stargate/"..state.."/init.lua","LUA") == 1) then
 			MsgN("Loading: stargate/"..state.."/init.lua");
 			include("stargate/"..state.."/init.lua");
 		end
-		for _,v in pairs(file.Find("stargate/"..state.."/*.lua","LUA")) do
+		for _,v in ipairs(file.Find("stargate/"..state.."/*.lua","LUA")) do
 			if(SERVER and state ~= "server") then
 				AddCSLuaFile("stargate/"..state.."/"..v); -- Add clientside files
 			end

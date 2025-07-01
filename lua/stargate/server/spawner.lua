@@ -530,7 +530,8 @@ function StarGate.GateSpawner.InitialSpawn(reload)
 			local protect = GetConVar("stargate_gatespawner_protect"):GetBool();
 			local i = 0; -- For delayed spawning
 
-			local tbl = {				StarGate.GateSpawner.Ramp,
+			local tbl = {
+				StarGate.GateSpawner.Ramp,
 				StarGate.GateSpawner.Gates,
 				StarGate.GateSpawner.Iris,
 				StarGate.GateSpawner.DHDs,
@@ -548,7 +549,8 @@ function StarGate.GateSpawner.InitialSpawn(reload)
 				StarGate.GateSpawner.Props,
 				StarGate.GateSpawner.Doors,
 				StarGate.GateSpawner.DoorButtons,
-				StarGate.GateSpawner.Console,			}
+				StarGate.GateSpawner.Console,
+			}
 
 			for k,t in pairs(tbl) do
 				for _,v in pairs(t) do
@@ -927,8 +929,8 @@ function StarGate.GateSpawner.Restored()
 			ents.FindByClass("cap_console"),
 		};
 		local protect = GetConVar("stargate_gatespawner_protect"):GetBool();
-		for _,v in pairs(check) do
-			for _,e in pairs(v) do
+		for _,v in ipairs(check) do
+			for _,e in ipairs(v) do
 				if (e:GetClass()=="prop_physics") then
 					local tbl = e.EntityMods;
 					if (tbl and tbl.GateSpawnerProp) then
@@ -961,4 +963,18 @@ function StarGate.GateSpawner.Restored()
 		StarGate.GateSpawner.Spawned = true;
 		StarGate.GateSpawner.Block = false;
 	end);
+end
+
+if not StarGate.GateSpawner.RestoreFixed then
+
+	local gmsave_LoadMap = gmsave.LoadMap
+	function gmsave.LoadMap(strMapContents, ply)
+		-- fix for gatespawner
+	   	if (StarGate and StarGate.GateSpawner and StarGate.GateSpawner.Restored) then
+	   		StarGate.GateSpawner.Restored();
+		end
+		return gmsave_LoadMap(strMapContents, ply);
+	end
+
+	StarGate.GateSpawner.RestoreFixed = true
 end

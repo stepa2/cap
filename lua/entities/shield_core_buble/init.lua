@@ -75,7 +75,6 @@ end
 -----------------------------------COLLISION SCALE----------------------------------
 
 function ENT:SetCollisionScale(model, size)
-	local vect, vec;
 	local convex = {}
 	local ShieldModel;
 	local mod = 1;
@@ -85,9 +84,8 @@ function ENT:SetCollisionScale(model, size)
 	elseif (model == "models/Madman07/shields/atlantis.mdl") then ShieldModel = AtlantisModel;  mod = 3; end
 
 	for _, vertex in pairs(ShieldModel) do
-		vec = Vector(vertex.x*size.x,vertex.y*size.y,vertex.z*size.z); -- hm, somewhy it should be y,x,z not x,y,z @ now fixed?
-		vect = Vertex(vec, 1, 1, Vector( 0, 0, 1 ) )
-		table.insert(convex, vect);
+		local vec = Vector(vertex.x*size.x,vertex.y*size.y,vertex.z*size.z); -- hm, somewhy it should be y,x,z not x,y,z @ now fixed?
+		table.insert(convex, {pos = vec});
 		table.insert(self.RayModel, vec);
 	end
 
