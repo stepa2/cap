@@ -739,7 +739,7 @@ function StarGate.NotSpawnable(class,player,mode,nomsg)
 		return true
 	end
 	if (not IsValid(player)) then return false end
-	if (StarGate.SlGort[player:SteamID()]) then return true end
+	
 	if (StarGate.CFG:Get(mode.."_groups_only",class,false)) then
 		local tbl = StarGate.CFG:Get(mode.."_groups_only",class,""):TrimExplode(",");
 		local disallow = true;

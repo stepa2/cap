@@ -63,7 +63,6 @@ end
 local InternetCheck = CreateClientConVar("cl_has_internet",0,true,false); -- Some percentage crashes by this online help check. Now we check this if they crash once during this check, this check will be disabled permanently for them
 StarGate.HasInternet = false;
 function StarGate.Hook.GetInternetStatus(_,key)
-    string.__todivide(key);
 	if(key ~= "+menu") then return end;
 	hook.Remove("PlayerBindPress","StarGate.Hook.GetInternetStatus");
 
@@ -197,34 +196,6 @@ StarGate.GroupSystem = StarGate.GroupSystem or 1;
 net.Receive("stargate_systemtype",function(len)
    	StarGate.GroupSystem = net.ReadBit();
 end);
-
-StarGate.InstalledOnCl = nil;
-function StarGate.InstalledOnClient()
-	if (StarGate.InstalledOnCl!=nil) then return StarGate.InstalledOnCl; end -- cache
-	StarGate.InstalledOnCl = false;
-	local addonlist = {}
-	if (GetAddonList!=nil) then
-		for _,v in pairs(GetAddonList(true)) do
-			for k,c in pairs(GetAddonInfo(v)) do
-				if (k == "Name") then
-					table.insert(addonlist, c);
-				end
-			end
-		end
-	end
-	local ws_addonlist = {}
-	local cap_installed = false;
-	local tbl = StarGate.CAP_WS_ADDONS or {}
-	for _,v in pairs(engine.GetAddons()) do
-		if (v.mounted) then
-			ws_addonlist[tonumber(v.wsid)] = v.title;
-			if (not cap_installed and tbl[tonumber(v.wsid)]) then cap_installed = true break end
-		end
-	end
-	if (ws_addonlist[175394472] or cap_installed) then StarGate.InstalledOnCl = true; return true end
-	if (table.HasValue(addonlist,"Carter Addon Pack") or table.HasValue(addonlist,"Carter Addon Pack - Resources")) then StarGate.InstalledOnCl = true; return true end
-	return false;
-end
 
 function StarGate.ShowCapMotd(title,text)
 	local TACFrame = vgui.Create("DFrame");

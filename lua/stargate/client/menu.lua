@@ -782,7 +782,6 @@ function StarGate.Update_Check(Panel)
 end
 
 function CAP_Outdated()
-	local addons = GetAddonList(true);
 	if (StarGate.HasInternet and StarGate.InstalledOnClient()) then
 		local UpdateFrame = vgui.Create("DFrame");
 		UpdateFrame:SetPos(ScrW()-540, 100);

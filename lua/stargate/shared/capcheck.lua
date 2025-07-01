@@ -101,51 +101,47 @@ end
 if (CLIENT) then
 
 	local function CAP_dxlevel()
-		if (StarGate.InstalledOnClient()) then
-			local UpdateFrame = vgui.Create("DFrame");
-			UpdateFrame:SetPos(ScrW()-580, 240);
-			UpdateFrame:SetSize(500,230);
-			UpdateFrame:SetTitle(SGLanguage.GetMessage("stargate_dxlevel_01"));
-			UpdateFrame:SetVisible(true);
-			UpdateFrame:SetDraggable(true);
-			UpdateFrame:ShowCloseButton(true);
-			UpdateFrame:SetBackgroundBlur(false);
-			UpdateFrame:MakePopup();
-			UpdateFrame.Paint = function()
+		local UpdateFrame = vgui.Create("DFrame");
+		UpdateFrame:SetPos(ScrW()-580, 240);
+		UpdateFrame:SetSize(500,230);
+		UpdateFrame:SetTitle(SGLanguage.GetMessage("stargate_dxlevel_01"));
+		UpdateFrame:SetVisible(true);
+		UpdateFrame:SetDraggable(true);
+		UpdateFrame:ShowCloseButton(true);
+		UpdateFrame:SetBackgroundBlur(false);
+		UpdateFrame:MakePopup();
+		UpdateFrame.Paint = function()
 
-				// Thanks Overv, http://www.facepunch.com/threads/1041686-What-are-you-working-on-V4-John-Lua-Edition
-				local matBlurScreen = Material( "pp/blurscreen" )
+			// Thanks Overv, http://www.facepunch.com/threads/1041686-What-are-you-working-on-V4-John-Lua-Edition
+			local matBlurScreen = Material( "pp/blurscreen" )
 
-				// Background
-				surface.SetMaterial( matBlurScreen )
-				surface.SetDrawColor( 255, 255, 255, 255 )
+			// Background
+			surface.SetMaterial( matBlurScreen )
+			surface.SetDrawColor( 255, 255, 255, 255 )
 
-				matBlurScreen:SetFloat( "$blur", 5 )
-				render.UpdateScreenEffectTexture()
+			matBlurScreen:SetFloat( "$blur", 5 )
+			render.UpdateScreenEffectTexture()
 
-				surface.DrawTexturedRect( -ScrW()/10, -ScrH()/10, ScrW(), ScrH() )
+			surface.DrawTexturedRect( -ScrW()/10, -ScrH()/10, ScrW(), ScrH() )
 
-				surface.SetDrawColor( 100, 100, 100, 150 )
-				surface.DrawRect( 0, 0, ScrW(), ScrH() )
+			surface.SetDrawColor( 100, 100, 100, 150 )
+			surface.DrawRect( 0, 0, ScrW(), ScrH() )
 
-				// Border
-				surface.SetDrawColor( 50, 50, 50, 255 )
-				surface.DrawOutlinedRect( 0, 0, UpdateFrame:GetWide(), UpdateFrame:GetTall() )
+			// Border
+			surface.SetDrawColor( 50, 50, 50, 255 )
+			surface.DrawOutlinedRect( 0, 0, UpdateFrame:GetWide(), UpdateFrame:GetTall() )
 
-				draw.DrawText(SGLanguage.GetMessage("stargate_dxlevel_02"), "ScoreboardText", 250, 25, Color(255, 255, 255, 255),TEXT_ALIGN_CENTER);
-				draw.DrawText(SGLanguage.GetMessage("stargate_dxlevel_03"), "ScoreboardText", 10, 80, Color(255, 255, 255, 255),TEXT_ALIGN_LEFT);
-				draw.DrawText(SGLanguage.GetMessage("stargate_dxlevel_04"), "ScoreboardText", 250, 160, Color(255, 255, 255, 255),TEXT_ALIGN_CENTER);
-			end;
+			draw.DrawText(SGLanguage.GetMessage("stargate_dxlevel_02"), "ScoreboardText", 250, 25, Color(255, 255, 255, 255),TEXT_ALIGN_CENTER);
+			draw.DrawText(SGLanguage.GetMessage("stargate_dxlevel_03"), "ScoreboardText", 10, 80, Color(255, 255, 255, 255),TEXT_ALIGN_LEFT);
+			draw.DrawText(SGLanguage.GetMessage("stargate_dxlevel_04"), "ScoreboardText", 250, 160, Color(255, 255, 255, 255),TEXT_ALIGN_CENTER);
+		end;
 
-			local close = vgui.Create("DButton", UpdateFrame);
-			close:SetText(SGLanguage.GetMessage("stargate_updater_04"));
-			close:SetPos(380, 195);
-			close:SetSize(80, 25);
-			close.DoClick = function (btn)
-				UpdateFrame:Close();
-			end
-
-
+		local close = vgui.Create("DButton", UpdateFrame);
+		close:SetText(SGLanguage.GetMessage("stargate_updater_04"));
+		close:SetPos(380, 195);
+		close:SetSize(80, 25);
+		close.DoClick = function (btn)
+			UpdateFrame:Close();
 		end
 	end
 	concommand.Add("CAP_dxlevel",CAP_dxlevel)
@@ -224,16 +220,6 @@ if (CLIENT) then
 	end
 	concommand.Add("CAP_debugerror",CAP_DebugError)
 
-end
-
--- just to be sure
-if (GetAddonList!=nil and (table.HasValue( GetAddonList(true), "before_cap_sg_groups" ) or table.HasValue( GetAddonList(true), "z_cap_sg_groups" ))) then
-	status = "Error";
-	MsgN("Status: "..status)
-	table.insert(StarGate_Group.ErrorMSG, {"The Stargate Group System has been found on your system. Please remove it.","01"});
-	table.insert(StarGate_Group.ErrorMSG_HTML, "sg_err_01");
-	MsgN("-------");
-	MsgN("Error #01\n"..StarGate_Group.ErrorMSG[table.Count(StarGate_Group.ErrorMSG)][1]:Replace("\\n","\n"));
 end
 
 local function Workshop_res_Installed()

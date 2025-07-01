@@ -19,29 +19,6 @@
 StarGate.Hook = StarGate.Hook or {};
 -- CreateConVar("gmod_stargate_version",StarGate.CURRENT_VERSION); -- Which version?
 
-/* Workshop part code
-local ws_addons = {}
-for _,v in pairs(engine.GetAddons()) do
-	if (v.mounted) then table.insert(ws_addons, v.title); end
-end
-local addonlist = {}
-for _,v in pairs(GetAddonList(true)) do
-	for k,c in pairs(GetAddonInfo(v)) do
-		if (k == "Name") then
-			table.insert(addonlist, c);
-		end
-	end
-end
-local types = {
-	code = "StarGate CAP - Base Code",
-	base = "StarGate CAP - Base Content",
-}
-function StarGate.CheckModule(type)
-	if (types[type] and table.HasValue(ws_addons,types[type]) or table.HasValue(addonlist,"Carter Addon Pack - Resources")) then return true end
-	return false;
-end
-*/
-
 function StarGate.CheckModule(type)
 	return true;
 end
