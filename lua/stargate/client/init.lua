@@ -86,14 +86,12 @@ function StarGate.Hook.GetInternetStatus(_,key)
 
 	StarGate.CURRENT_VERSION = StarGate.CapVer;
 
-	local installed = StarGate.InstalledOnClient();
-
 	-- displaying warning message when user have dxlevel 81 or lower
-	if (installed and GetConVar("mat_dxlevel"):GetInt()<90) then
+	if GetConVar("mat_dxlevel"):GetInt()<90 then
 		LocalPlayer():ConCommand("CAP_dxlevel");
 	end
 
-	if (installed and StarGate_Group.Error and not game.SinglePlayer()) then
+	if StarGate_Group.Error and not game.SinglePlayer() then
 		net.Start("CL_CAP_ERROR");
 		net.WriteTable(StarGate_Group.ErrorMSG);
 		net.WriteTable(StarGate_Group.ErrorMSG_HTML);
@@ -115,7 +113,12 @@ function StarGate.Hook.GetInternetStatus(_,key)
 				if(version) then
 					StarGate.LATEST_VERSION = version;
 
-					if (installed and (not StarGate.WorkShop or StarGate.CompareVersion(StarGate.LATEST_VERSION,StarGate.CURRENT_VERSION,-8)) and StarGate.CompareVersion(StarGate.LATEST_VERSION,StarGate.CURRENT_VERSION)) then
+					if (
+						not StarGate.WorkShop 
+						or StarGate.CompareVersion(StarGate.LATEST_VERSION,StarGate.CURRENT_VERSION,-8)
+					) and StarGate.CompareVersion(StarGate.LATEST_VERSION,StarGate.CURRENT_VERSION)
+					then
+						
 						LocalPlayer():ConCommand("CAP_Outdated");
 					end
 				end
@@ -132,7 +135,7 @@ function StarGate.Hook.GetInternetStatus(_,key)
 					StarGate.HasInternet = true;
 					StarGate.LATEST_VERSION = version;
 
-					if (installed and not StarGate.WorkShop and StarGate.CompareVersion(StarGate.LATEST_VERSION,StarGate.CURRENT_VERSION)) then
+					if (not StarGate.WorkShop and StarGate.CompareVersion(StarGate.LATEST_VERSION,StarGate.CURRENT_VERSION)) then
 						LocalPlayer():ConCommand("CAP_Outdated");
 					end
 				end

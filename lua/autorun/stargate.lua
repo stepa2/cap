@@ -1,8 +1,8 @@
 -- Small library loader! Therefore no GPL Header (but it's GPLed)
 StarGate = StarGate or {};
 StarGate.CAP = true; -- for some scripts
--- Find out, if the stargate is attempt to getting loaded on a server, which does not have it installed.
-StarGate.Installed = true;
+
+
 StarGate.Loading = false;
 StarGate.WorkShop = false;
 StarGate.CapVer = 0;

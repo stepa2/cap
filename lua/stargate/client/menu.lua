@@ -579,35 +579,6 @@ local info_page = [[<html>
 
 --################# Adds the tab to the spawnmenu @aVoN
 function StarGate.Hook.AddToolTab()
-
-	if(not StarGate.Installed or not StarGate.InstalledOnClient()) then
-		local cat_name = "Stargate";
-		spawnmenu.AddCreationTab(cat_name,function()
-			local Frame = vgui.Create("EditablePanel");
-			--Frame.Paint = function() end
-
-			local HTML = vgui.Create("DHTML",Frame);
-			local HTMLControls = vgui.Create("EditablePanel",Frame);
-			HTMLControls:Dock(TOP);
-			HTMLControls:SetHeight(36);
-
-			local HomeButton = vgui.Create( "DImageButton", HTMLControls )
-			HomeButton.HTML = HTML;
-			HomeButton:SetSize( 32, 32 )
-			HomeButton:SetMaterial( "gui/HTML/home" )
-			HomeButton:Dock( LEFT )
-			HomeButton:DockMargin( 0, 2, 0, 2 )
-			HomeButton.DoClick = function(self) if (self.HTML) then self.HTML:SetHTML(info_page); end end
-
-			HTML:SetKeyBoardInputEnabled(true);
-			HTML:SetMouseInputEnabled(true);
-			HTML:SetHTML(info_page);
-			HTML:Dock(FILL);
-			return Frame;
-		end, "icon16/cog_delete.png", 60 )
-
-		return
-	end
 	-- Add Tab
 	-- local logo;
 	-- if(file.Exists("materials/gui/cap_logo","GAME")) then logo = "gui/cap_logo" end;
@@ -775,49 +746,45 @@ function StarGate.Update_Check(Panel)
 end
 
 function CAP_Outdated()
-	if (StarGate.HasInternet and StarGate.InstalledOnClient()) then
-		local UpdateFrame = vgui.Create("DFrame");
-		UpdateFrame:SetPos(ScrW()-540, 100);
-		UpdateFrame:SetSize(440,130);
-		UpdateFrame:SetTitle(SGLanguage.GetMessage("stargate_updater_01"));
-		UpdateFrame:SetVisible(true);
-		UpdateFrame:SetDraggable(true);
-		UpdateFrame:ShowCloseButton(true);
-		UpdateFrame:SetBackgroundBlur(false);
-		UpdateFrame:MakePopup();
-		UpdateFrame.Paint = function()
+	local UpdateFrame = vgui.Create("DFrame");
+	UpdateFrame:SetPos(ScrW()-540, 100);
+	UpdateFrame:SetSize(440,130);
+	UpdateFrame:SetTitle(SGLanguage.GetMessage("stargate_updater_01"));
+	UpdateFrame:SetVisible(true);
+	UpdateFrame:SetDraggable(true);
+	UpdateFrame:ShowCloseButton(true);
+	UpdateFrame:SetBackgroundBlur(false);
+	UpdateFrame:MakePopup();
+	UpdateFrame.Paint = function()
 
-			// Thanks Overv, http://www.facepunch.com/threads/1041686-What-are-you-working-on-V4-John-Lua-Edition
-			local matBlurScreen = Material( "pp/blurscreen" )
+		// Thanks Overv, http://www.facepunch.com/threads/1041686-What-are-you-working-on-V4-John-Lua-Edition
+		local matBlurScreen = Material( "pp/blurscreen" )
 
-			// Background
-			surface.SetMaterial( matBlurScreen )
-			surface.SetDrawColor( 255, 255, 255, 255 )
+		// Background
+		surface.SetMaterial( matBlurScreen )
+		surface.SetDrawColor( 255, 255, 255, 255 )
 
-			matBlurScreen:SetFloat( "$blur", 5 )
-			render.UpdateScreenEffectTexture()
+		matBlurScreen:SetFloat( "$blur", 5 )
+		render.UpdateScreenEffectTexture()
 
-			surface.DrawTexturedRect( -ScrW()/10, -ScrH()/10, ScrW(), ScrH() )
+		surface.DrawTexturedRect( -ScrW()/10, -ScrH()/10, ScrW(), ScrH() )
 
-			surface.SetDrawColor( 100, 100, 100, 150 )
-			surface.DrawRect( 0, 0, ScrW(), ScrH() )
+		surface.SetDrawColor( 100, 100, 100, 150 )
+		surface.DrawRect( 0, 0, ScrW(), ScrH() )
 
-			// Border
-			surface.SetDrawColor( 50, 50, 50, 255 )
-			surface.DrawOutlinedRect( 0, 0, UpdateFrame:GetWide(), UpdateFrame:GetTall() )
+		// Border
+		surface.SetDrawColor( 50, 50, 50, 255 )
+		surface.DrawOutlinedRect( 0, 0, UpdateFrame:GetWide(), UpdateFrame:GetTall() )
 
-			draw.DrawText(SGLanguage.GetMessage("stargate_updater_02",StarGate.CURRENT_VERSION,StarGate.LATEST_VERSION).."\n"..SGLanguage.GetMessage("stargate_updater_03"), "ScoreboardText", 220, 30, Color(255, 255, 255, 255),TEXT_ALIGN_CENTER);
-		end;
+		draw.DrawText(SGLanguage.GetMessage("stargate_updater_02",StarGate.CURRENT_VERSION,StarGate.LATEST_VERSION).."\n"..SGLanguage.GetMessage("stargate_updater_03"), "ScoreboardText", 220, 30, Color(255, 255, 255, 255),TEXT_ALIGN_CENTER);
+	end;
 
-		local close = vgui.Create("DButton", UpdateFrame);
-		close:SetText(SGLanguage.GetMessage("stargate_updater_04"));
-		close:SetPos(340, 95);
-		close:SetSize(80, 25);
-		close.DoClick = function (btn)
-			UpdateFrame:Close();
-		end
-
-
+	local close = vgui.Create("DButton", UpdateFrame);
+	close:SetText(SGLanguage.GetMessage("stargate_updater_04"));
+	close:SetPos(340, 95);
+	close:SetSize(80, 25);
+	close.DoClick = function (btn)
+		UpdateFrame:Close();
 	end
 end
 concommand.Add("CAP_Outdated",CAP_Outdated)

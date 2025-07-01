@@ -19,7 +19,6 @@
 
 --################# Adds the glider's keysettings @aVoN
 --[[function StarGate.Hook.AddF302KeysettingsConfig()
-	--if(not StarGate.Installed) then return end;
 	spawnmenu.AddToolMenuOption("Cap","Keybinders","F302"," F302 Settings","","",StarGate.F302Settings);
 end
 hook.Add("AddToolMenuTabs","StarGate.Hook.AddF302KeysettingsConfig",StarGate.Hook.AddF302KeysettingsConfig);]]
