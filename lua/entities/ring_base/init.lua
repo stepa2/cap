@@ -10,6 +10,8 @@ local protected_entities = {
 	func_movelinear = true,
 	func_rot_button= true,
 	func_rotating = true,
+	func_detail=true,
+	func_brush=true,
 	prop_door_rotating=true
 	-- ring_* and stargate_* protected too
 }

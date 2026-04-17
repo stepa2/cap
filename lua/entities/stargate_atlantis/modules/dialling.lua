@@ -62,7 +62,7 @@ function ENT.Sequence:Dial(inbound,fast,fail,busy)
 			add = add + 2.5; -- The delay is necessary because the diallin below takes about 4.5 seconds with a delay of 0.1 second between each light
 			local rnd = {};
 			for i=1,chevs do
-				math.randomseed(os.clock()+i); -- Increases randomness
+				--math.randomseed(os.clock()+i); -- Increases randomness
 				if(i == 4 and chevs == 7) then
 					-- This delay must be a bit shorter!
 					rnd[i] = math.random(11,13)/100;
@@ -192,7 +192,7 @@ function ENT.Sequence:Dial(inbound,fast,fail,busy)
 		end
         local rnd = {}; -- Random time-ammount by a call to make it more "unartificial"
     	for i=1,runs do
-    		math.randomseed(os.clock()+i); -- Increases randomness
+    		--math.randomseed(os.clock()+i); -- Increases randomness
     		rnd[i] = math.Round(math.random(50,125)/100);
     	end
 		local rnds = rnd[1]+rnd[2]+rnd[3]+rnd[4]+rnd[5]+rnd[6];

@@ -14,7 +14,7 @@ if SERVER then
 AddCSLuaFile();
 
 function ENT:Initialize()
-	math.randomseed(CurTime())
+	--math.randomseed(CurTime())
 	if !self.ConTable or table.Count(self.ConTable)==0 then return end
 	self.Entity:SetModel(self.ConTable["sModel"][2])
 	self.Entity.Sound=CreateSound(self.Entity, self.ConTable["sSound"][2])

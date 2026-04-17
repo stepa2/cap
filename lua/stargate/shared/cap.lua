@@ -266,15 +266,16 @@ StarGate.Bullets = StarGate.Bullets or {};
 
 
 hook.Add("EntityFireBullets","StarGate.EntityFireBullets",function(self,bullet)
-	if(not bullet) then return end;
-	local original_bullet = table.Copy(bullet);
+	if(not bullet) then return end;          
+	local original_bullet = table.Copy(bullet);   
 	local override = false; -- If set to true, we will shoot the bullets instead of letting the engine decide
 	-- The modified part now, to determine if we hit a shield!
-	local spread = bullet.Spread or Vector(0,0,0); bullet.Spread = Vector(0,0,0);
+	local spread = bullet.Spread or Vector(0,0,0);
 	local direction = (bullet.Dir or Vector(0,0,0));
 	local pos = bullet.Src or self:GetPos();
 	local rnd = {};
-	rnd = {math.Rand(-1,1),math.Rand(-1,1)};
+	       
+	rnd = {util.SharedRandom("StarGate.Bullet.FirstRun", -1, 1),util.SharedRandom("StarGate.Bullet.SecondRun", -1, 1)};
 	--################# If we hit anything, run the hook
 	local dir = Vector(direction.x,direction.y,direction.z); -- We need a "new fresh" vector
 	--Calculate Bullet-Spread!
@@ -286,6 +287,7 @@ hook.Add("EntityFireBullets","StarGate.EntityFireBullets",function(self,bullet)
 		-- Instead letting the engine decide to add randomness, we are doing it (Just for the trace)
 		bullet.Dir = dir;
 	end
+	
 	local trace = StarGate.Trace:New(pos,dir*16*1024,{self,self:GetParent()});
 	if(hook.Call("StarGate.Bullet",GAMEMODE,self,bullet,trace)) then
 		return false

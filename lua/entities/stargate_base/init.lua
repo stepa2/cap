@@ -650,7 +650,7 @@ function ENT:TriggerInputDefault(k,v,mobile,mdhd)
 			if (Data.Color) then v = Vector(Data.Color.r,Data.Color.g,Data.Color.b) self.CustomEHColor = nil end
 		end
 		self.EHColor = Color(v.x,v.y,v.z);
-		self:SetNWVector("EHColor",v)
+		self:SetNWVector("EHColor",v);
 		if (IsValid(self.EventHorizon)) then
 			self.EventHorizon:SetEHColor(self.EHColor);
 		end
@@ -797,7 +797,74 @@ end
 
 function ENT:FakeDelay() return true end;
 
+function ENT:PreEntityCopy()
+	local dupeInfo = {};
+
+	if (self.IsGroupStargate) then
+		if (self.ChevDestroyed) then 
+			dupeInfo.ChevDestroyed = self.ChevDestroyed;
+		end
+		
+		for key,value in pairs(self.chev_destroyed) do
+			if (value) then 
+				if (dupeInfo.chev_destroyed==nil) then dupeInfo.chev_destroyed = {} end
+				dupeInfo.chev_destroyed[key] = value;
+			end
+		end
+	end
+	
+	local SaveVars = {"RingInbound", "ChevLight", "Classic", "AtlType", "Chev9Special"};
+	
+	for key,variable in pairs(SaveVars) do
+		if (self[variable]) then
+			dupeInfo[variable] = self[variable];
+		end
+	end
+
+	if (self.CustomEHColor) then
+		dupeInfo.CustomEHColor = self.EHColor;
+	end
+	if (self.CustomEHType) then
+		dupeInfo.CustomEHType = self.EventHorizonType;
+	end
+	
+	duplicator.StoreEntityModifier(self, "StarGateExtraDupeInfo", dupeInfo);
+	StarGate.WireRD.PreEntityCopy(self)
+end
+
 function ENT:PostEntityPaste(ply, Ent, CreatedEntities)
 	if (StarGate.NotSpawnable(Ent:GetClass(),ply)) then self.Entity:Remove(); return end
+	
+	if (Ent.EntityMods.StarGateExtraDupeInfo) then
+		local dupeInfo = Ent.EntityMods.StarGateExtraDupeInfo;
+		if (self.IsGroupStargate) then
+			if (dupeInfo.ChevDestroyed) then 
+				self.ChevDestroyed = dupeInfo.ChevDestroyed;
+			end
+			
+			if (dupeInfo.chev_destroyed) then
+				for key,value in pairs(dupeInfo.chev_destroyed) do
+					self.chev_destroyed[key] = value;
+				end
+			end
+		end
+		
+		local SaveVars = {"RingInbound", "ChevLight", "Classic", "AtlType", "Chev9Special"};
+		
+		for key,variable in pairs(SaveVars) do
+			if (dupeInfo[variable]) then
+				self[variable] = dupeInfo[variable];
+			end
+		end
+
+		if (dupeInfo.CustomEHColor) then
+			local col = Vector(dupeInfo.CustomEHColor.r, dupeInfo.CustomEHColor.g,dupeInfo.CustomEHColor.b);
+			self:TriggerInput("Event Horizon Color",col);
+		end
+		if (dupeInfo.CustomEHType) then
+			self:TriggerInput("Event Horizon Type",dupeInfo.CustomEHType);
+		end
+	end
+	
 	StarGate.WireRD.PostEntityPaste(self,ply,Ent,CreatedEntities)
 end

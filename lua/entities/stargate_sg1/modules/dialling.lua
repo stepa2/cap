@@ -48,9 +48,10 @@ function ENT.Sequence:Dial(inbound,fast,fail,busy)
 		else
 			local rnd = {}; -- Increase randomness (makes it less artificial)
 			for i=1,chevs-2 do
-				math.randomseed(os.clock()+i);
+				--math.randomseed(os.clock()+i);
 				rnd[i] = math.random(30,100)/100;
 			end
+			
 			rnd[chevs-1] = 1;
 			local rnds = rnd[1]+rnd[2]+rnd[3]+rnd[4]+rnd[5]+rnd[6];
 			if(chevs == 9)then
@@ -190,7 +191,7 @@ function ENT.Sequence:Dial(inbound,fast,fail,busy)
 		end
 		local rnd = {}; -- Increases randomness
 		for i=1,chevs do
-			math.randomseed(os.clock()+i);
+			--math.randomseed(os.clock()+i);
 			rnd[i] = math.random(300,400)/100;
 		end
 		local rnds = rnd[1]+rnd[2]+rnd[3]+rnd[4]+rnd[5]+rnd[6]+rnd[7];
